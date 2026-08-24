@@ -192,6 +192,7 @@
     <a href="#design">Design</a>
     <a href="#case">Case study</a>
     <a href="#realworld">Real problems</a>
+    <a href="#validate">Validation</a>
     <a href="#improve">BE3D fixes</a>
     <a href="#adopt">Adoption</a>
   </nav>
@@ -208,6 +209,7 @@
     <span class="pill"><b>Authors</b> Hu · Myung · Mani · Iqbal</span>
     <span class="pill"><b>License</b> MIT</span>
     <span class="pill"><b>Pairs with</b> Genomics 2 Proteins Portal</span>
+    <a class="pill" href="https://github.com/xX-its-amit-Xx/be3d-vetting" style="text-decoration:none"><b>↗ Code &amp; data</b> github.com/xX-its-amit-Xx/be3d-vetting</a>
   </div>
 
   <div class="tiles">
@@ -537,7 +539,77 @@
     </div>
   </div>
 
-  <div class="callout" style="margin-top:18px">These are BE3D-generated, structure-grounded <b>hypotheses</b> from public screen data — strengthened by the recovery of known residues as positive controls, and bounded by the caveats in each decision log (enrichment-vs-dropout direction, AlphaFold confidence in the KRAS α5/HVR region, per-guide causality). Full decision logs, parameter sweeps, and outputs: <code>research/P2_run_{KRAS,MCL1,DNMT3A}.md</code> + <code>real_output/P2_*/</code>.</p></div>
+  <div class="callout" style="margin-top:18px">These are BE3D-generated, structure-grounded <b>hypotheses</b> from public screen data — strengthened by the recovery of known residues as positive controls, and bounded by the caveats in each decision log (enrichment-vs-dropout direction, AlphaFold confidence in the KRAS α5/HVR region, per-guide causality). Full decision logs, parameter sweeps, honest discrimination benchmarks, and outputs are in the repo: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/research">research/P2_run_*.md &amp; P2_user_*.md</a> — see the <a href="#validate">Validation</a> section for the benchmarked verdicts.</p></div>
+</div></section>
+
+<!-- VALIDATION SCORECARD + OUTREACH -->
+<section id="validate"><div class="wrap">
+  <div class="eyebrow">Honest validation · does it discriminate, or call everything?</div>
+  <h2>Benchmarked against ground truth — with the failures shown</h2>
+  <p style="max-width:880px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So for each user package we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and — critically — whether BE3D <b>beats a trivial baseline</b> (just calling buried residues, or AlphaMissense). The verdicts below are deliberately uneven. Each links to the full, reproducible benchmark.</p>
+
+  <div class="callout warnc">Consistent finding across targets: BE3D's <b>base rate swings from ~13% (KRAS) to 37–45% (TP53/MCL1/DNMT3A)</b> — so its raw p&lt;0.05 flag can't be trusted uniformly; <b>you must rank</b>. That's the concrete cost of its missing FDR/q-values.</div>
+
+  <div class="tablewrap"><table id="valTable"><thead><tr>
+    <th>Target · user</th><th>Base rate</th><th>Enrichment vs chance</th><th>Discrimination gap</th><th>Beats trivial baseline?</th><th>Honest verdict</th>
+  </tr></thead><tbody id="valBody"></tbody></table></div>
+
+  <div class="grid2" style="align-items:start;margin-top:18px">
+    <div class="card"><h3 style="color:var(--good)">Where BE3D genuinely adds signal</h3><ul class="tick good">
+      <li><b>Druggable but not point-mutated targets</b> — MCL1 is amplification-driven, so somatic 3D-hotspot tools (3dhotspots.org) return <i>nothing</i>; a functional screen is the only 3D map.</li>
+      <li><b>Drug-escape geometry</b> — KRAS adagrasib resistance (8/9 known residues, 5.6× chance): recurrence tools only see the activating G12/G13/Q61 codons, an orthogonal axis.</li>
+      <li><b>Effect direction &amp; editor-accessible proxies</b> — LOF vs GOF, and interface patches (DNMT3A) that stand in for base-edit-inaccessible clinical sites.</li>
+    </ul></div>
+    <div class="card"><h3 style="color:var(--crit)">Where it doesn't (shown, not hidden)</h3><ul class="tick bad">
+      <li><b>AlphaMissense out-discriminates it on conserved cores</b> — on TP53, AM ranks the DNA-binding core better (OR 55 vs 33).</li>
+      <li><b>It can't beat "is it folded?"</b> — on BRCA1 the domain signal is fully recapitulated by a pLDDT&gt;70 baseline; residue-level agreement with Findlay SGE is ~0 (ρ≈0.05) with real false positives.</li>
+      <li><b>Unproven ≠ absent</b> — KRAS sotorasib shows no significant pocket enrichment; that finding is labeled a hypothesis, not a win.</li>
+      <li><b>Blind spots</b> — base editing can't reach some validated residues at all (DNMT3A R882; ~half of MCL1's functional set) → false negatives, complementary to predictors.</li>
+    </ul></div>
+  </div>
+
+  <h3 style="margin-top:30px">For your lab — copyable packages</h3>
+  <p style="max-width:860px">Each target ships a ready-to-send email, a 1-page brief, a hotspot table with per-residue <b>TP / novel-candidate / false-positive</b> flags, and a Genomics 2 Proteins Portal TSV for interactive 3D viewing — all in the repo, honest about caveats, with an optional invitation to share validation results back for tuning.</p>
+  <div class="grid3" id="outreachCards"></div>
+  <p class="note" style="margin-top:14px">Reproduce any run: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/research">research/P2_run_*.md &amp; P2_user_*.md</a> · harness in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/harness">harness/</a> · figures in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/figures">figures/</a>.</p>
+
+  <script>
+  (function(){
+    const REPO='https://github.com/xX-its-amit-Xx/be3d-vetting/blob/main';
+    const TREE='https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main';
+    const V={good:'var(--good)',mixed:'var(--warn)',warn:'var(--serious)'};
+    const val=[
+      {t:'KRAS · adagrasib',u:'G12C med-chem',base:'15.9%',enr:'5.6× · OR 57 · p=1.4e-6',gap:'45% vs 1.9% (24×)',bl:'✓ beats burial',verdict:'Strong — 8/9 known resistance residues, zero-shot',v:'good',doc:'research/P2_user_KRAS.md'},
+      {t:'KRAS · sotorasib',u:'G12C med-chem',base:'12.7%',enr:'NS (p=0.51)',gap:'1.4×',bl:'—',verdict:'Unproven — distal α5 result is a hypothesis, not a recovery',v:'warn',doc:'research/P2_user_KRAS.md'},
+      {t:'TP53',u:'driver-gene lab',base:'36%',enr:'2.63× · p=4.2e-7',gap:'94% vs 14%',bl:'✓ burial · ✗ AlphaMissense',verdict:'Discriminates, but AlphaMissense out-ranks the conserved core',v:'mixed',doc:'research/P2_user_TP53.md'},
+      {t:'MCL1 · drug arms',u:'BH3-mimetic dev',base:'~40%',enr:'OR ∞ · p≈6e-4',gap:'100% vs 12.5% (8×)',bl:'✓ beats burial &amp; AM',verdict:'Strong — and the only 3D map (MCL1 not point-mutated)',v:'good',doc:'research/P2_user_MCL1.md'},
+      {t:'DNMT3A',u:'epigenetics / AML',base:'37%',enr:'OR ~12 · p≈1e-11',gap:'83% vs 24%',bl:'✓ beats burial',verdict:'Discriminates on rank; blind to R882 (not base-editable)',v:'good',doc:'research/P2_user_DNMT3A.md'},
+      {t:'BRCA1',u:'clinical / VUS',base:'7.4%',enr:'3.1× · OR 4.3 · p=6e-8',gap:'domain-level only',bl:'✗ ties "is it folded"',verdict:'Domain-level only; weak residue resolution; real FPs vs Findlay SGE',v:'warn',doc:'research/P2_user_BRCA1.md'},
+    ];
+    document.getElementById('valBody').innerHTML=val.map(r=>`<tr>
+      <td class="tool">${r.t}<span class="cat">${r.u}</span></td>
+      <td class="mono">${r.base}</td><td class="mono" style="white-space:normal">${r.enr}</td>
+      <td class="mono" style="white-space:normal">${r.gap}</td><td style="white-space:normal">${r.bl}</td>
+      <td style="white-space:normal"><span style="color:${V[r.v]}">●</span> ${r.verdict} <a href="${REPO}/${r.doc}" title="reproduce">▸</a></td>
+    </tr>`).join('');
+
+    const out=[
+      {g:'KRAS',u:'KRAS G12C drug-discovery lab',hook:'Sotorasib vs adagrasib have different 3D escape maps; a distal α5 candidate to test.'},
+      {g:'MCL1',u:'BH3-mimetic / apoptosis developer',hook:'Dependency & drug both on the BH3 groove; a second, off-groove stability escape route.'},
+      {g:'DNMT3A',u:'epigenetics / AML lab',hook:'A base-editable RD-interface patch as a testable proxy for the (uneditable) R882 defect.'},
+      {g:'TP53',u:'p53 / driver-gene lab',hook:'84% of recurrent hotspots recovered zero-shot — with the AlphaMissense caveat stated.'},
+      {g:'BRCA1',u:'clinical-genetics / VUS lab',hook:'An honest negative: domain-level only; where BE3D helps vs where SGE/AM are better.'},
+    ];
+    document.getElementById('outreachCards').innerHTML=out.map(o=>`<div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center"><b style="color:var(--ink)">${o.g}</b><span class="sector">${o.u}</span></div>
+      <p style="font-size:.82rem;margin:8px 0 10px">${o.hook}</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem">
+        <a class="chip" href="${REPO}/outreach/${o.g}/${o.g}_email.md">✉ email</a>
+        <a class="chip" href="${TREE}/outreach/${o.g}">⤓ files</a>
+      </div>
+    </div>`).join('');
+  })();
+  </script>
 </div></section>
 
 <!-- IMPROVEMENTS FOUND BY USING IT -->
@@ -594,14 +666,15 @@
 </div></section>
 
 <footer><div class="wrap">
-  <p><b>Methodology.</b> This dossier was produced by an orchestrated agent team ("meta-king → queens → workers"): the BE3D repository was cloned and read at source; four parallel research agents covered the competitive landscape, personas &amp; market, cross-domain critique, and code-level design. BE3D was then <b>installed and actually run</b> — first on its KBTBD4 example, then on <b>four unfamiliar public base-editing screens</b> (KRAS, MCL1, DNMT3A + a LYZ plumbing test) via a hardened, reusable harness, each with an exhaustive parameter sweep and a full decision log. Real usage produced the novel findings above and a live <b>improvement log</b> for the tool. Backing dossiers (Q1–Q5, P2 scout + decision logs) and all raw outputs accompany this page.</p>
+  <p><b>Methodology.</b> This dossier was produced by an orchestrated agent team ("meta-king → queens → workers"): the BE3D repository was cloned and read at source; four parallel research agents covered the competitive landscape, personas &amp; market, cross-domain critique, and code-level design. BE3D was then <b>installed and actually run</b> — first on its KBTBD4 example, then on <b>four unfamiliar public base-editing screens</b> (KRAS, MCL1, DNMT3A + a LYZ plumbing test) via a hardened, reusable harness, each with an exhaustive parameter sweep and a full decision log. Real usage produced the novel findings above, honest discrimination benchmarks against ground truth, and a live <b>improvement log</b> for the tool. Everything is reproducible and public: <b><a href="https://github.com/xX-its-amit-Xx/be3d-vetting">github.com/xX-its-amit-Xx/be3d-vetting</a></b> (dossiers, harness, decision logs, per-target benchmarks, figures, and this dashboard's source).</p>
   <p><b>Key sources.</b>
     <a href="https://github.com/broadinstitute/BE3D">broadinstitute/BE3D</a> ·
     <a href="https://g2p.broadinstitute.org/">Genomics 2 Proteins Portal</a> ·
     G2P: <a href="https://www.nature.com/articles/s41592-024-02409-0">Nat Methods 2024</a> ·
     ProTiler-Mut: <a href="https://www.cell.com/cell-systems/abstract/S2405-4712(26)00133-X">Cell Systems 2026</a> ·
     KBTBD4: <a href="https://www.biorxiv.org/content/10.1101/2024.05.14.593897v1">Yeo et al.</a> ·
-    <a href="https://www.iqballab.org/">Iqbal Lab</a> · <a href="http://www.liaulab.com/publications">Liau Lab</a>.
+    <a href="https://www.iqballab.org/">Iqbal Lab</a> · <a href="http://www.liaulab.com/publications">Liau Lab</a> ·
+    <b>This analysis (code+data):</b> <a href="https://github.com/xX-its-amit-Xx/be3d-vetting">github.com/xX-its-amit-Xx/be3d-vetting</a>.
   </p>
   <p class="muted">Independent capability assessment · not affiliated with or endorsed by the Broad Institute. Market figures are cited estimates; addressable-lab counts are order-of-magnitude.</p>
 </div></footer>
