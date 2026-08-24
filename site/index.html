@@ -545,10 +545,10 @@
 <!-- VALIDATION SCORECARD + OUTREACH -->
 <section id="validate"><div class="wrap">
   <div class="eyebrow">Honest validation · does it discriminate, or call everything?</div>
-  <h2>Benchmarked on 16 targets — with the failures shown</h2>
-  <p style="max-width:900px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So across <b>16 real base-editing screens</b> we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and whether BE3D <b>beats a trivial baseline</b> (buried residues, or AlphaMissense). The verdict distribution is deliberately, honestly mixed — about a third genuine, a third qualified, a third negative.</p>
+  <h2>Benchmarked on 15 genes — with the failures shown</h2>
+  <p style="max-width:900px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So across <b>15 real base-editing screens</b> (17 target·drug arms) we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and whether BE3D <b>beats a trivial baseline</b> (buried residues, or AlphaMissense). The verdict distribution is deliberately, honestly mixed — about a third genuine, a third qualified, a third negative.</p>
   <div class="tiles" style="margin-top:0">
-    <div class="tile"><div class="k">Real screens benchmarked</div><div class="n">16</div><div class="l">genes · 17 target·drug arms</div></div>
+    <div class="tile"><div class="k">Genes benchmarked</div><div class="n">15</div><div class="l">17 target·drug arms</div></div>
     <div class="tile"><div class="k">Genuine signal</div><div class="n" style="color:var(--good)">~6</div><div class="l">beats chance &amp; a baseline</div></div>
     <div class="tile"><div class="k">Qualified</div><div class="n" style="color:var(--warn)">~6</div><div class="l">real but loses to AlphaMissense / noisy</div></div>
     <div class="tile"><div class="k">Honest negatives</div><div class="n" style="color:var(--serious)">~5</div><div class="l">no signal / over-call — flagged "don't use"</div></div>
@@ -589,7 +589,7 @@
   </div>
 
   <h3 style="margin-top:30px">For your lab — copyable packages</h3>
-  <p style="max-width:880px">All <b>16 targets</b> ship a shareable package in the repo (<a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/outreach">outreach/</a>): a ready-to-send email, a 1-page brief, a hotspot table with per-residue <b>TP / novel-candidate / false-positive</b> flags, and a Genomics 2 Proteins Portal TSV for interactive 3D viewing — honest about caveats (including the "don't use it here" negatives), with an optional invitation to share validation results back for tuning. Five featured:</p>
+  <p style="max-width:880px">All <b>15 targets</b> ship a shareable package in the repo (<a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/outreach">outreach/</a>): a ready-to-send email, a 1-page brief, a hotspot table with per-residue <b>TP / novel-candidate / false-positive</b> flags, and a Genomics 2 Proteins Portal TSV for interactive 3D viewing — honest about caveats (including the "don't use it here" negatives), with an optional invitation to share validation results back for tuning. Five featured:</p>
   <div class="grid3" id="outreachCards"></div>
   <p class="note" style="margin-top:14px">Reproduce any run: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/research">research/P2_run_*.md, P2_user_*.md &amp; P2_analysis_*.md</a> · harness in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/harness">harness/</a> · every target's package in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/outreach">outreach/</a>.</p>
 
