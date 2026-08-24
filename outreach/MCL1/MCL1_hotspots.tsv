@@ -1,0 +1,83 @@
+residue	aa	direction	LFC3D_repr	n_robust_runs	in_groove_iface	in_drug_pocket	flag	runs
+215	R	+ (S63845 resistance)	1.2	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+216	V	+ (S63845 resistance)	1.2	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+217	G	+ (S63845 resistance)	1.06	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+218	D	+ (S63845 resistance)	1.06	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+219	G	+ (S63845 resistance)	1.06	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+220	V	+ (S63845 resistance)	1.06	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+221	Q	+ (S63845 resistance)	1.06	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+255	S	+ (S63845 resistance)	0.81	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+256	D	+ (S63845 resistance)	0.81	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+257	G	+ (S63845 resistance)	0.81	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+258	V	+ (S63845 resistance)	0.81	5	True	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+259	T	+ (S63845 resistance)	0.81	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+269	S	+ (S63845 resistance)	0.88	5	False	False	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+295	T	- (A1331852 dependency)	-1.55	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+296	D	- (A1331852 dependency)	-1.55	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+297	V	- (A1331852 dependency)	-1.55	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+298	L	- (A1331852 dependency)	-1.55	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+299	V	- (A1331852 dependency)	-1.55	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+300	R	- (A1331852 dependency)	-2.11	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+301	T	- (A1331852 dependency)	-2.11	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+302	K	- (A1331852 dependency)	-2.11	5	False	False	LIKELY-FP(distal surface 295-303)	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+317	E	- (A1331852 dependency)	-1.12	5	True	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+318	F	- (A1331852 dependency)	-1.12	5	True	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+319	F	- (A1331852 dependency)	-1.12	5	True	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+320	H	- (A1331852 dependency)	-1.12	5	True	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+325	E	+ (S63845 resistance)	1.33	5	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+326	G	+ (S63845 resistance)	1.0	5	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+59	G	- (dropout, low-conf)	-0.58	4	False	False	NOVEL-stability(N-term/PEST)	r02_af_drop_rad6;r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+85	E	+ (S63845 resistance)	0.8	4	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+95	R	+ (S63845 resistance)	0.88	4	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+137	R	+ (S63845 resistance)	0.79	4	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+177	Q	+ (S63845 resistance)	1.13	4	False	False	NOVEL-stability(alpha2)	r08_af_combo;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+178	S	+ (S63845 resistance)	1.13	4	False	False	NOVEL-stability(alpha2)	r08_af_combo;r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+254	F	+ (S63845 resistance)	0.81	4	True	True	TP-groove	r08_af_combo;r09_af_a1331852;r11_3pk1_combo;r14_3mk8_combo
+321	V	- (A1331852 dependency)	-1.12	4	False	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852;r10_3pk1_drop;r15_6qb4_drop
+70	T	- (dropout, low-conf)	-0.15	3	False	False	NOVEL-stability(N-term/PEST)	r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+78	R	+ (S63845 resistance)	0.62	3	False	False	NOVEL-stability(N-term/PEST)	r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+122	P	- (dropout, low-conf)	-0.21	3	False	False	NOVEL-stability(N-term/PEST)	r10_3pk1_drop;r13_3mk8_drop;r15_6qb4_drop
+164	P	+ (S63845 resistance)	0.5	3	False	False	NOVEL-stability(N-term/PEST)	r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+166	P	+ (S63845 resistance)	0.27	3	False	False	NOVEL-stability(N-term/PEST)	r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+176	R	+ (S63845 resistance)	0.45	3	False	False	NOVEL-stability(alpha2)	r11_3pk1_combo;r14_3mk8_combo;r16_6qb4_combo
+180	E	+ (S63845 resistance)	1.13	2	False	False	NOVEL-stability(alpha2)	r08_af_combo;r16_6qb4_combo
+214	R	+ (S63845 resistance)	0.71	2	False	False	TP-groove	r08_af_combo;r09_af_a1331852
+316	V	- (A1331852 dependency)	-1.12	2	False	False	TP-groove	r02_af_drop_rad6;r09_af_a1331852
+322	E	- (A1331852 dependency)	-2.03	2	False	False	NOVEL-stability(C-term)	r02_af_drop_rad6;r09_af_a1331852
+324	L	+ (S63845 resistance)	1.33	2	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852
+327	G	+ (S63845 resistance)	1.0	2	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852
+328	I	+ (S63845 resistance)	0.83	2	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852
+329	R	+ (S63845 resistance)	0.83	2	False	False	NOVEL-stability(C-term)	r08_af_combo;r09_af_a1331852
+58	G	- (dropout, low-conf)	-0.58	1	False	False	NOVEL-stability(N-term/PEST)	r02_af_drop_rad6
+60	S	- (dropout, low-conf)	-0.58	1	False	False	NOVEL-stability(N-term/PEST)	r02_af_drop_rad6
+79	P	+ (S63845 resistance)	0.79	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+84	A	+ (S63845 resistance)	0.8	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+86	V	+ (S63845 resistance)	0.8	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+94	A	+ (S63845 resistance)	0.88	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+96	L	+ (S63845 resistance)	0.88	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+123	E	- (A1331852 dependency)	-1.43	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+124	E	- (A1331852 dependency)	-2.14	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+125	E	- (A1331852 dependency)	-2.14	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+126	L	- (A1331852 dependency)	-1.51	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+127	D	- (A1331852 dependency)	-1.6	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+128	G	- (A1331852 dependency)	-1.6	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+129	Y	- (A1331852 dependency)	-1.7	1	False	False	NOVEL-stability(N-term/PEST)	r09_af_a1331852
+136	K	+ (S63845 resistance)	0.79	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+138	P	+ (S63845 resistance)	0.79	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+163	T	+ (S63845 resistance)	0.75	1	False	False	NOVEL-stability(N-term/PEST)	r08_af_combo
+175	Y	+ (S63845 resistance)	0.45	1	False	False	NOVEL-stability(alpha2)	r11_3pk1_combo
+213	L	- (A1331852 dependency)	-1.04	1	False	False	TP-groove	r09_af_a1331852
+222	R	?		1	False	False	TP-groove	r11_3pk1_combo
+263	R	+ (S63845 resistance)	0.7	1	True	True	TP-groove	r08_af_combo
+264	I	+ (S63845 resistance)	0.7	1	False	False	TP-groove	r08_af_combo
+265	V	+ (S63845 resistance)	0.7	1	True	False	TP-groove	r08_af_combo
+266	T	+ (S63845 resistance)	0.7	1	True	True	TP-groove	r08_af_combo
+267	L	+ (S63845 resistance)	0.7	1	True	True	TP-groove	r08_af_combo
+268	I	+ (S63845 resistance)	0.7	1	False	False	TP-groove	r08_af_combo
+292	E	- (A1331852 dependency)	-0.99	1	False	False	LIKELY-FP(distal surface 295-303)	r09_af_a1331852
+293	S	- (A1331852 dependency)	-0.99	1	False	False	LIKELY-FP(distal surface 295-303)	r09_af_a1331852
+294	I	- (A1331852 dependency)	-0.99	1	False	True	TP-pocket	r09_af_a1331852
+330	N	- (A1331852 dependency)	-1.78	1	False	False	NOVEL-stability(C-term)	r09_af_a1331852
+331	V	- (A1331852 dependency)	-1.78	1	False	False	NOVEL-stability(C-term)	r09_af_a1331852
+332	L	- (A1331852 dependency)	-1.78	1	False	False	NOVEL-stability(C-term)	r09_af_a1331852
+333	L	- (A1331852 dependency)	-1.78	1	False	False	NOVEL-stability(C-term)	r09_af_a1331852

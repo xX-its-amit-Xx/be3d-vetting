@@ -1,0 +1,785 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>BE3D — A Vetting Dossier</title>
+<meta name="description" content="An independent, exhaustive vetting of BE3D (beclust3d) — the Broad Institute's structure-function analysis tool for base-editor tiling screens: competitive landscape, personas, market, cross-domain critique, design deep-dive, and adoption."/>
+<style>
+  :root{
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --surface2:#201f1e;
+    --ink:#ffffff; --ink2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --axis:#383835; --border:rgba(255,255,255,0.10);
+    --s1:#3987e5; --s2:#d95926; --s3:#199e70; --s4:#c98500; --s5:#d55181; --s6:#008300; --s7:#9085e9; --s8:#e66767;
+    --good:#0ca30c; --warn:#fab219; --serious:#ec835a; --crit:#d03b3b;
+    --seq-hi:#5598e7; --seq-mid:#256abf; --seq-lo:#16385f;
+    --mono: ui-monospace,"SF Mono","Cascadia Code","JetBrains Mono",Menlo,Consolas,monospace;
+    --sans: system-ui,-apple-system,"Segoe UI",sans-serif;
+    --maxw:1180px;
+  }
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --page:#f4f3ef; --surface:#fcfcfb; --surface2:#f0efec;
+    --ink:#0b0b0b; --ink2:#52514e; --muted:#6b6a66;
+    --grid:#e1e0d9; --axis:#c3c2b7; --border:rgba(11,11,11,0.10);
+    --s1:#2a78d6; --s2:#eb6834; --s3:#1baf7a; --s4:#eda100; --s5:#e87ba4; --s6:#008300; --s7:#4a3aa7; --s8:#e34948;
+    --seq-hi:#2a78d6; --seq-mid:#86b6ef; --seq-lo:#cde2fb;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:var(--s1);text-decoration:none}
+  a:hover{text-decoration:underline}
+  h1,h2,h3,h4{line-height:1.15;margin:0 0 .4em;font-weight:650;letter-spacing:-.01em}
+  h2{font-size:clamp(1.5rem,3vw,2.1rem);margin-top:0}
+  h3{font-size:1.15rem}
+  p{margin:0 0 1em;color:var(--ink2)}
+  code,.mono{font-family:var(--mono);font-size:.86em}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+  section{padding:64px 0;border-top:1px solid var(--grid)}
+  .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+
+  /* nav */
+  header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--page) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--grid)}
+  .nav .wrap{display:flex;align-items:center;gap:18px;height:56px}
+  .brand{font-family:var(--mono);font-weight:700;letter-spacing:.02em;color:var(--ink);white-space:nowrap}
+  .brand .dot{color:var(--s1)}
+  .navlinks{display:flex;gap:16px;overflow-x:auto;flex:1;scrollbar-width:none}
+  .navlinks::-webkit-scrollbar{display:none}
+  .navlinks a{color:var(--ink2);font-size:.82rem;white-space:nowrap;padding:6px 0;border-bottom:2px solid transparent}
+  .navlinks a:hover{color:var(--ink);text-decoration:none}
+  .toggle{margin-left:auto;background:var(--surface);border:1px solid var(--border);color:var(--ink2);border-radius:999px;padding:6px 12px;font-size:.75rem;cursor:pointer;font-family:var(--mono)}
+  .toggle:hover{color:var(--ink)}
+
+  /* hero */
+  .hero{padding:72px 0 40px}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);letter-spacing:-.03em;margin-bottom:.15em}
+  .hero h1 .be{color:var(--s1)}
+  .lede{font-size:clamp(1.05rem,2.4vw,1.4rem);color:var(--ink);max-width:760px}
+  .sub{color:var(--muted);max-width:720px;margin-top:6px}
+  .pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:.72rem;color:var(--ink2);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:5px 11px;margin:4px 6px 4px 0}
+  .pill b{color:var(--ink)}
+
+  /* stat tiles */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:30px}
+  .tile{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px 16px 14px}
+  .tile .n{font-size:1.9rem;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+  .tile .n small{font-size:.9rem;color:var(--muted);font-weight:500}
+  .tile .l{font-size:.78rem;color:var(--ink2);margin-top:2px}
+  .tile .k{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  @media(max-width:820px){.grid2,.grid3{grid-template-columns:1fr}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px}
+  .card h3{margin-top:0}
+  .muted{color:var(--muted)}
+  .lead-card{background:linear-gradient(135deg,color-mix(in srgb,var(--s1) 14%,var(--surface)),var(--surface));border:1px solid color-mix(in srgb,var(--s1) 30%,var(--border))}
+
+  /* pipeline */
+  .flow{display:flex;gap:12px;flex-wrap:wrap;align-items:stretch}
+  .step{flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative}
+  .step .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--s1);margin-bottom:6px}
+  .step h4{margin:0 0 6px;color:var(--ink)}
+  .step p{font-size:.82rem;margin:0;color:var(--ink2)}
+  .arrow{align-self:center;color:var(--muted);font-size:1.4rem}
+
+  /* table */
+  .controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+  .chip{background:var(--surface);border:1px solid var(--border);color:var(--ink2);border-radius:999px;padding:6px 13px;font-size:.78rem;cursor:pointer;font-family:var(--mono)}
+  .chip[aria-pressed="true"]{background:var(--s1);border-color:var(--s1);color:#fff}
+  .tablewrap{overflow-x:auto;border:1px solid var(--grid);border-radius:12px}
+  table{border-collapse:collapse;width:100%;font-size:.82rem}
+  th,td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--grid);white-space:nowrap}
+  thead th{position:sticky;top:56px;background:var(--surface2);color:var(--ink2);font-weight:600;font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;z-index:2}
+  tbody tr:hover{background:color-mix(in srgb,var(--s1) 8%,transparent)}
+  td.tool{font-weight:650;color:var(--ink);white-space:normal;min-width:170px}
+  td .cat{display:block;font-family:var(--mono);font-size:.66rem;color:var(--muted);font-weight:400;white-space:normal}
+  .yes{color:var(--good);font-weight:700}
+  .no{color:var(--muted)}
+  .part{color:var(--warn);font-weight:600}
+  .be3drow{background:color-mix(in srgb,var(--s1) 12%,transparent)!important}
+  .be3drow td.tool{color:var(--s1)}
+
+  /* persona cards */
+  .pcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+  .pcard{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:7px}
+  .pcard .id{font-family:var(--mono);font-size:.68rem;color:var(--muted)}
+  .pcard h4{margin:0;font-size:.98rem;color:var(--ink)}
+  .pcard .role{font-size:.8rem;color:var(--ink2)}
+  .dots{display:flex;gap:3px}
+  .dots i{width:9px;height:9px;border-radius:50%;background:var(--axis);display:inline-block}
+  .dots i.on{background:var(--s1)}
+  .badge{font-family:var(--mono);font-size:.64rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:999px;display:inline-block}
+  .b-high{background:color-mix(in srgb,var(--good) 22%,transparent);color:var(--good)}
+  .b-med{background:color-mix(in srgb,var(--warn) 20%,transparent);color:var(--warn)}
+  .b-low{background:color-mix(in srgb,var(--muted) 24%,transparent);color:var(--ink2)}
+  .sector{font-family:var(--mono);font-size:.63rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .pcard .uc{font-size:.78rem;color:var(--ink2);border-top:1px solid var(--grid);padding-top:7px;margin-top:2px}
+
+  /* heatmap */
+  .hm{overflow-x:auto;border:1px solid var(--grid);border-radius:12px}
+  table.heat{font-size:.75rem}
+  table.heat th{white-space:nowrap}
+  table.heat td.cell{text-align:center;font-family:var(--mono);font-weight:700;color:#08131f;width:42px}
+  .h-H{background:var(--seq-hi)}
+  .h-M{background:var(--seq-mid);color:#eaf1fb}
+  .h-L{background:var(--seq-lo);color:var(--ink2)}
+  :root[data-theme="light"] .h-H{color:#fff}
+  :root[data-theme="light"] .h-M{color:#0b0b0b}
+
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.76rem;color:var(--ink2);margin:10px 0}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:13px;height:13px;border-radius:3px;display:inline-block;border:1px solid var(--border)}
+
+  ul.tick{list-style:none;padding:0;margin:0}
+  ul.tick li{padding:6px 0 6px 24px;position:relative;font-size:.86rem;color:var(--ink2);border-bottom:1px solid var(--grid)}
+  ul.tick li:last-child{border-bottom:0}
+  ul.tick li::before{content:"";position:absolute;left:4px;top:12px;width:8px;height:8px;border-radius:2px}
+  ul.tick.good li::before{background:var(--good)}
+  ul.tick.bad li::before{background:var(--crit)}
+  ul.tick li b{color:var(--ink)}
+
+  .rank{counter-reset:r}
+  .rank .ritem{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--grid)}
+  .rank .ritem:last-child{border-bottom:0}
+  .rank .ritem::before{counter-increment:r;content:counter(r);font-family:var(--mono);font-weight:700;color:var(--s1);background:color-mix(in srgb,var(--s1) 14%,transparent);border-radius:8px;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+  .ritem div b{color:var(--ink)}
+  .ritem div p{margin:2px 0 0;font-size:.82rem}
+
+  /* bars */
+  .bars{display:flex;flex-direction:column;gap:9px}
+  .bar{display:grid;grid-template-columns:130px 1fr auto;gap:10px;align-items:center;font-size:.8rem}
+  .bar .lab{color:var(--ink2);text-align:right}
+  .bar .track{background:var(--surface2);border-radius:6px;height:22px;overflow:hidden;border:1px solid var(--border)}
+  .bar .fill{height:100%;border-radius:6px 4px 4px 6px;background:var(--s1)}
+  .bar .val{font-family:var(--mono);color:var(--ink);font-size:.76rem;font-variant-numeric:tabular-nums}
+
+  .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:.84rem}
+  .kv dt{color:var(--muted);font-family:var(--mono);font-size:.76rem}
+  .kv dd{margin:0;color:var(--ink2)}
+
+  .note{font-size:.78rem;color:var(--muted);font-style:italic}
+  .callout{border-left:3px solid var(--s1);padding:4px 0 4px 16px;margin:14px 0;color:var(--ink2)}
+  .callout.warnc{border-color:var(--warn)}
+  .verdict{font-size:1.05rem;color:var(--ink)}
+  footer{padding:48px 0 80px;color:var(--muted);font-size:.8rem}
+  footer a{color:var(--ink2)}
+  .tag2{display:inline-block;font-family:var(--mono);font-size:.62rem;letter-spacing:.06em;color:var(--muted);border:1px solid var(--border);border-radius:5px;padding:2px 6px;margin:2px}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--grid);border-radius:12px;overflow:hidden}
+  .split>div{padding:18px}
+  .split>div:first-child{border-right:1px solid var(--grid);background:color-mix(in srgb,var(--good) 6%,var(--surface))}
+  .split>div:last-child{background:color-mix(in srgb,var(--crit) 6%,var(--surface))}
+  @media(max-width:820px){.split{grid-template-columns:1fr}.split>div:first-child{border-right:0;border-bottom:1px solid var(--grid)}}
+  .flag{background:color-mix(in srgb,var(--warn) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--warn) 40%,var(--border));border-radius:12px;padding:14px 16px;font-size:.86rem}
+</style>
+</head>
+<body>
+<header class="nav"><div class="wrap">
+  <span class="brand">BE<span class="dot">·</span>3D <span style="color:var(--muted);font-weight:400">vetting dossier</span></span>
+  <nav class="navlinks">
+    <a href="#verdict">Verdict</a>
+    <a href="#what">What it is</a>
+    <a href="#landscape">Landscape</a>
+    <a href="#personas">Personas</a>
+    <a href="#usecases">Use cases</a>
+    <a href="#market">Impact</a>
+    <a href="#decide">Decide</a>
+    <a href="#cross">Cross-domain</a>
+    <a href="#critique">Critique</a>
+    <a href="#design">Design</a>
+    <a href="#case">Case study</a>
+    <a href="#realworld">Real problems</a>
+    <a href="#improve">BE3D fixes</a>
+    <a href="#adopt">Adoption</a>
+  </nav>
+  <button class="toggle" id="themeBtn">◐ theme</button>
+</div></header>
+
+<div class="wrap hero">
+  <div class="eyebrow">Independent capability vetting · compiled Aug 2026</div>
+  <h1><span class="be">BE3D</span> — every use, every user,<br/>every rival.</h1>
+  <p class="lede">BE3D (<code>beclust3d</code> v1.0.0, Broad Institute) turns a completed <b>base-editor tiling-mutagenesis screen</b> into <b>3D structural hotspots</b> of functionally important residues — mapping per-residue log-fold-change onto an AlphaFold/PDB structure, smoothing it in space (LFC3D), testing it against a randomization null, and clustering the survivors into hotspots.</p>
+  <p class="sub">This dossier vets it exhaustively: the competitive field, 20 user personas across academia &amp; industry, a persona×use-case fit matrix, market impact, cross-domain analogies, a code-level design deep-dive, a real run on the KBTBD4 example, and an adoption path via LLM/MCP.</p>
+  <div style="margin-top:14px">
+    <span class="pill"><b>Lab</b> Iqbal Lab (Broad) × Liau Lab (Harvard)</span>
+    <span class="pill"><b>Authors</b> Hu · Myung · Mani · Iqbal</span>
+    <span class="pill"><b>License</b> MIT</span>
+    <span class="pill"><b>Pairs with</b> Genomics 2 Proteins Portal</span>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><div class="k">Scope</div><div class="n">3</div><div class="l">pipeline modules: QA · Clust3D · MetaClust3D</div></div>
+    <div class="tile"><div class="k">Codebase</div><div class="n">~6,100 <small>LOC</small></div><div class="l">Python; 25 public functions</div></div>
+    <div class="tile"><div class="k">Tools compared</div><div class="n">18+</div><div class="l">across 5 adjacent fields</div></div>
+    <div class="tile"><div class="k">Personas mapped</div><div class="n">20</div><div class="l">11 academic · 7 industry · 2 clinical</div></div>
+    <div class="tile"><div class="k">Direct rivals</div><div class="n">1</div><div class="l">ProTiler-Mut (Cell Systems 2026)</div></div>
+    <div class="tile"><div class="k">Market by 2030</div><div class="n">$3.4<small>B</small></div><div class="l">CRISPR screening (17.7% CAGR)</div></div>
+  </div>
+</div>
+
+<!-- VERDICT -->
+<section id="verdict"><div class="wrap">
+  <div class="eyebrow">The bottom line</div>
+  <h2>A real, narrow, defensible niche — with one serious rival</h2>
+  <div class="grid2" style="align-items:start">
+    <div class="card lead-card">
+      <p class="verdict">BE3D occupies a genuine gap: the <b>only openly-packaged, base-editing-native, control-aware, meta-aggregating pipeline</b> that converts a functional tiling screen into statistically-tested 3D structural hotspots and hands them to an interactive portal.</p>
+      <p>Its novelty is real against the two worlds it bridges — it is <b>not</b> competing with upstream screen callers (MAGeCK, BAGEL, BEAN) or variant predictors (AlphaMissense, ESM); it consumes their output and adds a 3D layer none of them have. Against the cancer-genomics 3D-hotspot lineage (HotMAPS, HotSpot3D, CLUMPS) its deep differentiator is the <b>signal type</b>: a designed, continuous readout with real negative controls, not somatic mutation recurrence.</p>
+    </div>
+    <div class="card">
+      <h3>The one question that matters: BE3D vs ProTiler-Mut</h3>
+      <p>A concurrent tool — <b>ProTiler-Mut</b> (He et al., <i>Cell Systems</i> 2026) — does the same high-level thing: map CRISPR tiling-mutagenesis screens to 3D and call hotspot substructures.</p>
+      <div class="split" style="font-size:.82rem">
+        <div><b style="color:var(--good)">BE3D edges</b>
+          <ul class="tick good" style="margin-top:6px">
+            <li>Base-editing-native mutation parsing</li>
+            <li>Randomization null using the screen's own controls</li>
+            <li>Cross-species / isoform meta-aggregation</li>
+            <li>Direct G2P interactive-portal export</li>
+          </ul>
+        </div>
+        <div><b style="color:var(--serious)">ProTiler-Mut edges</b>
+          <ul class="tick bad" style="margin-top:6px">
+            <li>Rank-based (3D-RRA) robustness</li>
+            <li>Multi-condition phenotype modeling</li>
+            <li>Lineage/brand of established ProTiler</li>
+            <li>Explicit PPI-disruption emphasis</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note" style="margin-top:12px">Verdict: differentiated enough to coexist. BE3D should win on base-editing specificity + portal integration; it must publish a head-to-head benchmark to hold the ground.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- WHAT IT IS -->
+<section id="what"><div class="wrap">
+  <div class="eyebrow">The mechanism</div>
+  <h2>Three modules, one idea: denoise in 3D</h2>
+  <p style="max-width:760px">The core insight: single-residue screen signal is noisy, so <b>aggregating over 3D spatial neighborhoods</b> surfaces structurally-coherent functional hotspots that a 1D, sequence-order view misses — allosteric sites, interfaces, folding cores.</p>
+  <div class="flow">
+    <div class="step"><div class="tag">A · BE-QA</div><h4>Quality gate</h4><p>Mann-Whitney U + Kolmogorov-Smirnov tests: do knockout guides (nonsense/splice) separate from neutral guides (silent/no-mutation)? Two hypotheses; failing screens are dropped before interpretation.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="tag">B · BE-Clust3D</div><h4>LFC3D + hotspots</h4><p>Map LFC per residue onto the structure → LFC3D = mean of a residue's LFC and its neighbors within 6&#8491; → randomization null → z-score / p-value by direction → agglomerative clustering into hotspots → characterize (RSA, pLDDT, domains).</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="tag">C · BE-MetaClust3D</div><h4>Consensus</h4><p>Aggregate LFC3D across many screens (SUM) to rescue weak-but-concordant signal; an optional MUSCLE/Clustal alignment step integrates cross-species / cross-isoform screens.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><div class="tag">Out</div><h4>G2P export</h4><p>A Genomics 2 Proteins-formatted TSV drives interactive 3D viewing of hits &amp; clusters on the structure.</p></div>
+  </div>
+  <div class="callout">Inputs: a screen-scores TSV (<code>Mutation_type, Mutation_list, Gene, sgRNA_score</code>) + a UniProt ID (auto-fetches the AlphaFold model, isoform-aware) or a custom FASTA+PDB. Run zero-install in Colab, or locally from a YAML config.</div>
+</div></section>
+
+<!-- LANDSCAPE -->
+<section id="landscape"><div class="wrap">
+  <div class="eyebrow">Competitive landscape · meta-search of the field</div>
+  <h2>Where BE3D sits among 18 tools</h2>
+  <p>Filter by category. BE3D is highlighted. <span class="yes">●</span> yes &nbsp; <span class="part">◐</span> partial &nbsp; <span class="no">○</span> no. Click a header to sort.</p>
+  <div class="controls" id="catFilter"></div>
+  <div class="tablewrap"><table id="toolTable">
+    <thead><tr>
+      <th data-k="tool">Tool</th>
+      <th data-k="input">Input signal</th>
+      <th data-k="clust">3D&nbsp;clustering</th>
+      <th data-k="meta">Meta-aggr.</th>
+      <th data-k="consv">Conservation</th>
+      <th data-k="null">Null model</th>
+      <th data-k="be">BE-specific</th>
+      <th data-k="viz">Interactive viz</th>
+      <th data-k="open">Open</th>
+      <th data-k="maint">Maintained</th>
+    </tr></thead>
+    <tbody id="toolBody"></tbody>
+  </table></div>
+  <p class="note">Categories: upstream screen callers (MAGeCK/BAGEL/drugZ/BEAN) are complements, not competitors; somatic-mutation 3D tools (HotMAPS/HotSpot3D/CLUMPS/Oncodrive3D) share the machinery but eat mutation recurrence, not screen LFC; G2P is BE3D's output target; predictors (AlphaMissense/Missense3D/BE-Hive) are orthogonal.</p>
+</div></section>
+
+<!-- PERSONAS -->
+<section id="personas"><div class="wrap">
+  <div class="eyebrow">Who uses it · 20 personas</div>
+  <h2>Every plausible user, academic to industry</h2>
+  <p>Fit (◆◆◆◆◆) = how native BE3D is to their data &amp; workflow. Badge = adoption likelihood. Filter by sector.</p>
+  <div class="controls" id="secFilter"></div>
+  <div class="pcards" id="pcards"></div>
+</div></section>
+
+<!-- USE CASE MATRIX -->
+<section id="usecases"><div class="wrap">
+  <div class="eyebrow">Persona × use-case fit</div>
+  <h2>What each user actually does with it</h2>
+  <div class="legend">
+    <span><span class="sw" style="background:var(--seq-hi)"></span> High fit</span>
+    <span><span class="sw" style="background:var(--seq-mid)"></span> Medium</span>
+    <span><span class="sw" style="background:var(--seq-lo)"></span> Low</span>
+  </div>
+  <div class="hm"><table class="heat" id="heat"></table></div>
+  <p class="note" id="ucLegend" style="margin-top:12px"></p>
+</div></section>
+
+<!-- MARKET -->
+<section id="market"><div class="wrap">
+  <div class="eyebrow">Impact &amp; addressable market</div>
+  <h2>Levered to two rising curves: base editing &amp; AlphaFold</h2>
+  <div class="grid2" style="align-items:start">
+    <div>
+      <div class="tiles" style="margin-top:0">
+        <div class="tile"><div class="k">CRISPR screening mkt</div><div class="n">$1.5→3.4<small>B</small></div><div class="l">2025→2030 · 17.7% CAGR</div></div>
+        <div class="tile"><div class="k">Gene-editing cos.</div><div class="n">~332</div><div class="l">23 countries · ~217 in US</div></div>
+        <div class="tile"><div class="k">AlphaFold DB</div><div class="n">214<small>M</small></div><div class="l">structures — BE3D auto-fetches them</div></div>
+        <div class="tile"><div class="k">Core BE-screen labs</div><div class="n">~200–500</div><div class="l">est. · ~500–2,000 screens/yr</div></div>
+      </div>
+      <p class="note" style="margin-top:14px">Base editing is a &lt;6-year-old modality scaling fast (Beam ~$500M raise on BEAM-302 data; Verve VERVE-102 halved LDL in Ph1b). AlphaFold's near-complete proteome coverage removes BE3D's historical bottleneck — it now works on essentially any screened gene.</p>
+    </div>
+    <div class="card">
+      <h3>Adoption likelihood across the 20 personas</h3>
+      <div class="bars" id="adoptBars"></div>
+      <p class="note" style="margin-top:12px">Near-term market is <b>academic</b> (open-source adoption + citations, near-zero switching cost for screen labs). Industry is higher-value but slower — enterprises tend to borrow the <i>method</i> or reimplement for validated/GxP work.</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- DECISION -->
+<section id="decide"><div class="wrap">
+  <div class="eyebrow">Decision guide</div>
+  <h2>Should you reach for BE3D?</h2>
+  <div class="grid3">
+    <div class="card"><h3 style="color:var(--good)">Use BE3D when…</h3><ul class="tick good">
+      <li>You ran a <b>base-editor tiling screen</b> and have per-guide LFC</li>
+      <li>You want <b>3D hotspots</b>, not a 1D hit list</li>
+      <li>You have <b>multiple screens</b> (editors / conditions / species) to consolidate</li>
+      <li>Your target has an <b>AlphaFold or PDB</b> structure</li>
+      <li>You want interactive figures via <b>G2P</b></li>
+    </ul></div>
+    <div class="card"><h3 style="color:var(--warn)">Pair it with…</h3><ul class="tick">
+      <li><b>MAGeCK / BEAN</b> upstream to compute clean LFC</li>
+      <li><b>PyMOL / ChimeraX</b> for offline figure polish</li>
+      <li><b>AlphaMissense / ESM</b> to cross-check hotspots vs predicted pathogenicity</li>
+      <li><b>cBioPortal / ClinVar</b> to ask if a hotspot recurs in patients</li>
+      <li>An <b>LLM</b> to author the YAML &amp; interpret hits</li>
+    </ul></div>
+    <div class="card"><h3 style="color:var(--crit)">Look elsewhere when…</h3><ul class="tick bad">
+      <li>You need <b>pre-experiment</b> prediction → BE-Hive, AlphaMissense</li>
+      <li>Your data is <b>somatic mutation frequency</b> → HotMAPS, Oncodrive3D</li>
+      <li>You only need <b>gene-level hit calling</b> → MAGeCK, BAGEL</li>
+      <li>Your assay is <b>DMS</b> not base editing (fit degrades)</li>
+      <li>You need a <b>validated GxP</b> pipeline with SLA today</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- CROSS DOMAIN -->
+<section id="cross"><div class="wrap">
+  <div class="eyebrow">Cross-domain analogies</div>
+  <h2>BE3D's algorithm is a re-derivation of mature methods elsewhere</h2>
+  <p style="max-width:820px">Abstractly: <i>noisy point measurements along a sequence → project to a 3D point cloud → neighborhood-smooth → permutation null → spatial clustering → multi-experiment consensus.</i> That pattern is solved — often more rigorously — in six other fields. Each card names the mature technique and the concrete upgrade BE3D could borrow.</p>
+  <div class="grid3" id="crossCards"></div>
+</div></section>
+
+<!-- CRITIQUE -->
+<section id="critique"><div class="wrap">
+  <div class="eyebrow">Critique · balanced</div>
+  <h2>What it nails, what it risks, where to double down</h2>
+  <div class="split">
+    <div>
+      <h3 style="color:var(--good)">Strengths</h3>
+      <ul class="tick good">
+        <li><b>Right idea, real niche</b> — 3D spatial aggregation is exactly how adjacent fields attack this signal shape.</li>
+        <li><b>Honest QC gate</b> — non-optional MWU+KS on knockout-vs-neutral before any interpretation.</li>
+        <li><b>Has a null</b> — seeded randomization baseline, z-normalized; better than eyeballed thresholds.</li>
+        <li><b>Bidirectional</b> — splits +/− effects (LOF vs GOF/resistance) instead of |LFC|.</li>
+        <li><b>Meta-aggregation</b> — the correct lever to rescue weak signal across noisy screens.</li>
+        <li><b>Interoperable &amp; low-friction</b> — UniProt/AlphaFold auto-fetch, Colab, MIT, G2P handoff.</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="color:var(--crit)">Weaknesses / risks</h3>
+      <ul class="tick bad">
+        <li><b>Twin hard 6&#8491; cutoffs</b> (smoothing + clustering) — scale-blind, discontinuous, no data-driven radius.</li>
+        <li><b>No FDR / q-values</b> across residues — a real multiplicity gap at proteome scale.</li>
+        <li><b>Clusters get no significance</b> — geometric single-linkage only; no cluster-level p-value; chaining risk.</li>
+        <li><b>Global null</b> ignores local mutation tolerance &amp; guide-count heterogeneity.</li>
+        <li><b>Naive SUM meta</b> — ignores per-screen reliability &amp; between-screen heterogeneity.</li>
+        <li><b>pLDDT not propagated</b> into stats — low-confidence hotspots can be geometry artifacts.</li>
+        <li><b>Fragile toolchain</b> (DSSP fails on large PDBs; MUSCLE/Clustal broken on ARM) &amp; <b>no tests/CI/CLI</b>.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px">Where to double down — a prioritized roadmap</h3>
+  <div class="rank">
+    <div class="ritem"><div><b>Distance-decay (Gaussian) kernel with a data-driven length scale</b><p>Replace the hard 6&#8491; cutoff; fit the scale from a semivariogram/correlogram (kriging / Getis-Ord Gi*). Highest-impact, well-precedented.</p></div></div>
+    <div class="ritem"><div><b>Cluster-level permutation p-values + FDR/q-values</b><p>Adopt cluster-mass permutation (Maris-Oostenveld) at residue &amp; cluster level; report Benjamini-Hochberg/Storey q.</p></div></div>
+    <div class="ritem"><div><b>Local / covariate-adjusted null</b><p>MACS-style local λ; adjust the null for pLDDT, RSA, and guide count so quiet cores and noisy loops are judged fairly.</p></div></div>
+    <div class="ritem"><div><b>Inverse-variance / empirical-Bayes meta + I² heterogeneity</b><p>Weight screens by BE-QA quality; surface when screens disagree instead of silently summing.</p></div></div>
+    <div class="ritem"><div><b>Uncertainty &amp; robustness</b><p>Per-residue confidence intervals; sigma-clipped/median aggregation; deblending &amp; non-single-linkage clustering.</p></div></div>
+    <div class="ritem"><div><b>Engineering hardening</b><p>A real CLI (<code>be3d run config.yaml</code>), JSON results manifest, unit tests + CI, seeded-by-default, and a bundled DSSP fallback to kill the mkdssp failure.</p></div></div>
+  </div>
+</div></section>
+
+<!-- DESIGN -->
+<section id="design"><div class="wrap">
+  <div class="eyebrow">Design deep-dive · from the source</div>
+  <h2>How the repository is actually built</h2>
+  <div class="grid2" style="align-items:start">
+    <div class="card">
+      <h3>Architecture</h3>
+      <p>A per-stage pipeline over four subpackages, writing TSV/gzip artifacts into workdir subdirs so runs are resumable and auditable.</p>
+      <dl class="kv">
+        <dt>qa/</dt><dd>screen quality gate (MWU + KS)</dd>
+        <dt>lfc3d/</dt><dd>the core — structure, conservation, preprocess, randomize, prioritize, <code>calculate_lfc3d</code>, clustering, characterization</dd>
+        <dt>aggregate/</dt><dd>per-screen (nonaggregate) &amp; across-screen (metaaggregate) scoring</dd>
+        <dt>helpers/</dt><dd>G2P export; a vendored MUSCLE binary (macOS-arm64 only)</dd>
+      </dl>
+      <p class="note">No package-level CLI: all orchestration lives in a 1,608-line <code>examples/be3d_local.py</code> with four run modes (monomer, complex, ppi_diff, blind_target).</p>
+    </div>
+    <div class="card">
+      <h3>Algorithm internals</h3>
+      <ul class="tick">
+        <li><b>LFC3D(i)</b> = tunable aggregation (default mean) of residue <i>i</i>'s LFC ∪ all neighbors ≤6&#8491; (CA–CA, or min heavy-atom distance at atom level via a KD-tree). Neighbor topology precomputed once per screen.</li>
+        <li><b>Null</b> = permute per-guide LFCs (<code>np.random.permutation</code>, seeded, nRandom=1000) → re-aggregate to residues → re-smooth in 3D.</li>
+        <li><b>Significance</b> is one-tailed <i>by direction</i>: LFC z-scored vs No-Mutation control μ/σ; LFC3D vs the randomization-null μ/σ; thresholded p&lt;.05/.01/.001.</li>
+        <li><b>Clustering</b> = sklearn Agglomerative, single-linkage, euclidean on CA coords of significant residues, swept 4→20&#8491;.</li>
+        <li><b>Meta</b> = per-residue SUM of LFC3D across screens (neg &amp; pos aggregated independently).</li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid2" style="align-items:start;margin-top:16px">
+    <div class="card"><h3>Engineering — strengths</h3><ul class="tick good">
+      <li>Clean modular decomposition; full NumPy-style docstrings; flat public API.</li>
+      <li>Seeded, reproducible null; per-iteration <code>default_rng(i)</code>.</li>
+      <li>Defensive <code>assert</code> input contracts; hot-path reuse of neighbor sources across 1,000 randomizations.</li>
+      <li>Graceful fallbacks: pure-Python PDB parser, remote MUSCLE API, user-supplied FASTA/PDB/DSSP/alignment.</li>
+    </ul></div>
+    <div class="card"><h3>Engineering — smells</h3><ul class="tick bad">
+      <li><b>No tests, no CI</b> for a statistical method — the single biggest gap.</li>
+      <li><code>warnings.filterwarnings('ignore')</code> at import in many modules — hides real signals.</li>
+      <li><code>'-'</code> string sentinels mixed into float columns → object dtypes &amp; coercion round-trips.</li>
+      <li>Hard <code>unipos == PDB residue_number</code> assumption; mismatched user PDBs silently drop residues.</li>
+      <li>hatchling/setuptools packaging mismatch; live UniProt/AlphaFold/EBI deps via unmaintained <code>wget</code>.</li>
+    </ul></div>
+  </div>
+  <div class="flag" style="margin-top:16px">⚑ <b>Provenance correction.</b> This tool is from the <b>Iqbal Lab (PI Sumaiya Iqbal), Broad Institute</b>, in collaboration with the <b>Liau Lab (Brian Liau, Harvard)</b> — <b>not</b> an "APAR lab" (that string appears only inside base64 image blobs in a notebook). No standalone peer-reviewed BE3D paper exists yet (ISMB/ECCB 2025 talk; a PRC2 sequence-function atlas companion is in submission). The companion <b>G2P portal</b> is published: Kwon et al., <i>Nature Methods</i> 2024, DOI 10.1038/s41592-024-02409-0.</div>
+</div></section>
+
+<!-- CASE STUDY -->
+<section id="case"><div class="wrap">
+  <div class="eyebrow">Use-case deep dive · real output</div>
+  <h2>Case study: KBTBD4 — a molecular-glue degron, in 3D</h2>
+  <p style="max-width:820px">We installed BE3D and ran its shipped example: the <b>Yeo et al. ABE + CBE tiling screens of KBTBD4</b> mapped onto the <b>8VOJ</b> cryo-EM structure of the CRL3<sup>KBTBD4</sup>–HDAC1 complex (chain B, UniProt Q9NVX7-2). KBTBD4 is a CUL3 substrate receptor whose Kelch β-propeller is reshaped by the molecular glue <b>UM171</b> to license degradation of HDAC1/2 — a textbook structure-function question where 3D hotspots should light up the glue/substrate-binding surface.</p>
+  <div id="caseLive"></div>
+  <h3 style="margin-top:26px">The decisions a scientist actually makes</h3>
+  <div class="grid2" style="align-items:start">
+    <div class="card"><ul class="tick">
+      <li><b>QA gate</b> — accept the screen? BE3D uses Hypothesis-2 KS p&lt;0.05 (knockout vs pooled neutral).</li>
+      <li><b>Radius</b> — 6&#8491; is the default for both smoothing &amp; clustering; larger merges patches, smaller fragments them.</li>
+      <li><b>Aggregation</b> — mean (denoise) vs sum (accumulate) for LFC3D; mean vs SUM across the ABE+CBE meta step.</li>
+      <li><b>Residue vs atom level</b> — CA–CA is fast; min heavy-atom captures side-chain contacts at the interface.</li>
+    </ul></div>
+    <div class="card"><ul class="tick">
+      <li><b>p-threshold</b> — 0.05 / 0.01 / 0.001 trade sensitivity for specificity; which to cluster on?</li>
+      <li><b>Direction</b> — negative (dropout/LOF) vs positive (enrichment) hotspots read as different biology.</li>
+      <li><b>Chain / PPI scope</b> — score KBTBD4 alone, or include HDAC1 cross-chain neighbors for interface hotspots?</li>
+      <li><b>Structure choice</b> — the experimental 8VOJ complex vs the AlphaFold monomer changes the neighborhood graph.</li>
+    </ul></div>
+  </div>
+</div></section>
+
+<!-- REAL-WORLD APPLICATIONS -->
+<section id="realworld"><div class="wrap">
+  <div class="eyebrow">BE3D applied to real problems · not reproducing papers</div>
+  <h2>Three new questions, answered on public data</h2>
+  <p style="max-width:860px">We put BE3D to work on three <b>real, public base-editing screens it had never seen</b> (none are its shipped examples), each on a genuinely <i>open</i> 3D question the source paper did not answer. Every target got an exhaustive parameter sweep (radius 4/6/8/10 Å, mean vs sum, nRandom 500/1000, residue vs atom, monomer vs PPI) with a full decision log; only findings <b>robust across the sweep</b> are reported. As a sanity check, BE3D independently <b>re-discovered known resistance/clinical residues</b> in each case — then surfaced something new.</p>
+
+  <div class="grid3">
+    <div class="card">
+      <div class="sector" style="color:var(--s1)">KRAS · drug resistance</div>
+      <h3 style="margin:4px 0 6px">Two G12C drugs, two different 3D escape maps</h3>
+      <p style="font-size:.82rem"><b>Data:</b> Coelho/Dincer 2024 (Nat Genet), ~3,000 KRAS guides, sotorasib &amp; adagrasib arms, mapped on 6OIM/6UT0 + AlphaFold. 18 runs, all exit 0.</p>
+      <p style="font-size:.82rem"><b>Open gap:</b> the paper never <i>spatially</i> clustered resistance. Do the two inhibitors escape via the same residues?</p>
+      <ul class="tick" style="font-size:.8rem">
+        <li><b>No.</b> Sotorasib &amp; adagrasib share only 5 residues (Jaccard ≈ 0.12).</li>
+        <li>Adagrasib = one 27-residue orthosteric shell (60–72, 89–103).</li>
+        <li>Sotorasib = sparse pocket + a <b>physically separate distal cluster</b>.</li>
+        <li><span class="yes">✓ control:</span> re-finds known Y96 / R68 / H95 / Q99 (H95/Q99 adagrasib-specific, as published).</li>
+      </ul>
+      <p style="font-size:.82rem;color:var(--ink)"><b>NEW:</b> a robust <b>sotorasib-specific distal α5 cluster (147–156, ~27 Å from the drug)</b>; residues 148/154 significant in 7/7 AF runs. No prior report names this as a resistance site — a candidate allosteric-latch locus (flagged as hypothesis).</p>
+      <p class="note"><b>Act:</b> a sotorasib-class binder reaching toward the His95 groove should raise the resistance barrier; test α5 147–156 mutants for sotorasib-selective IC50 shift (Boltz pre-screen).</p>
+    </div>
+
+    <div class="card">
+      <div class="sector" style="color:var(--s3)">MCL1 · apoptosis (PPI mode)</div>
+      <h3 style="margin:4px 0 6px">Dependency and drug both live on the BH3 groove</h3>
+      <p style="font-size:.82rem"><b>Data:</b> Hanna 2021 (Cell), MCL1 CBE tiling (dropout + BH3-mimetic arms), on 3PK1/3MK8/6QB4 + AlphaFold. 19 monomer + 2 complex runs.</p>
+      <p style="font-size:.82rem"><b>Open gap:</b> is the essentiality hotspot the BH3-groove <i>PPI interface</i> or the <i>drug pocket</i>?</p>
+      <ul class="tick" style="font-size:.8rem">
+        <li>Both dependency &amp; S63845-resistance enrich on the <b>same BH3 groove</b> (Fisher OR=∞, p≈5–8e-4), not the pocket-only residues.</li>
+        <li>→ functional-genomics evidence that <b>S63845 is a true orthosteric mimetic</b>.</li>
+        <li>Robust groove hotspots R215/V216/V220/T254/N255/V256/F258/T266/F270; strongest T212I (+2.44).</li>
+      </ul>
+      <p style="font-size:.82rem;color:var(--ink)"><b>NEW:</b> a <b>second, off-groove resistance compartment</b> (α2 R176/Q177/S178/E180; C-term E325/G326; N-terminal PEST/phosphodegron E85/R78/P80/R95) — all &gt;8 Å from drug = escape via <b>MCL1 stability</b>, not drug binding.</p>
+      <p class="note"><b>Act:</b> orthosteric mimetics must de-risk the 9 groove escape residues; <b>MCL1 degraders</b> should target the stability axis to bypass groove escape.</p>
+    </div>
+
+    <div class="card">
+      <div class="sector" style="color:var(--s7)">DNMT3A · epigenetics / AML</div>
+      <h3 style="margin:4px 0 6px">A base-editable proxy for the R882 hotspot</h3>
+      <p style="font-size:.82rem"><b>Data:</b> Lue/Liau 2023 (Nat Chem Biol), DNMT3A base-editor scanning — an <i>activity-reporter</i> assay (citrine), on 4U7T. 12 runs, QA pass.</p>
+      <p style="font-size:.82rem"><b>Open gap:</b> which specific interface on the complex carries the loss-of-function vulnerability?</p>
+      <ul class="tick" style="font-size:.8rem">
+        <li>Dominant protein interface = the <b>RD homotetramer interface</b> (enrich 1.5–2.4×, 8/12 runs); FF interface second.</li>
+        <li>Robust patch T671/M674/V675/R676/H873/D876/V877/S878 (p&lt;.001 in 12/12).</li>
+        <li><span class="yes">✓ control:</span> FF hotspots R729/R736 co-localize with clinical residues (R736H = 2nd-commonest DNMT3A mutation).</li>
+      </ul>
+      <p style="font-size:.82rem;color:var(--ink)"><b>NEW:</b> the dominant clinical hotspot <b>R882 is base-editing-invisible</b> (CBE can't make R882H) — yet BE3D flags the <b>same tetramerization interface</b> through a clinically-<b>unannotated, base-editable patch</b>, a testable proxy for the R882 defect and a candidate tetramer-disruption drug epitope.</p>
+      <p class="note"><b>Act:</b> epigenetics/AML groups validate the T671/873–878 patch as an R882 proxy and druggable interface.</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:18px">These are BE3D-generated, structure-grounded <b>hypotheses</b> from public screen data — strengthened by the recovery of known residues as positive controls, and bounded by the caveats in each decision log (enrichment-vs-dropout direction, AlphaFold confidence in the KRAS α5/HVR region, per-guide causality). Full decision logs, parameter sweeps, and outputs: <code>research/P2_run_{KRAS,MCL1,DNMT3A}.md</code> + <code>real_output/P2_*/</code>.</p></div>
+</div></section>
+
+<!-- IMPROVEMENTS FOUND BY USING IT -->
+<section id="improve"><div class="wrap">
+  <div class="eyebrow">What real use surfaced · a fix list for BE3D</div>
+  <h2>Using it hard is the best critique</h2>
+  <p style="max-width:820px">Running BE3D end-to-end on four unfamiliar targets (Windows / Python 3.14 / pandas 3.x) exposed concrete, fixable gaps — logged live in <code>BE3D_IMPROVEMENTS.md</code>. Several are one-line fixes that would materially widen who can run the tool.</p>
+  <div class="tiles" style="margin-top:6px">
+    <div class="tile"><div class="k">Blockers hit &amp; worked around</div><div class="n">6</div><div class="l">each aborts a run until patched</div></div>
+    <div class="tile"><div class="k">Correctness / interpretation</div><div class="n">4</div><div class="l">silent sign &amp; schema pitfalls</div></div>
+    <div class="tile"><div class="k">Friction points</div><div class="n">6+</div><div class="l">time/error costs</div></div>
+    <div class="tile"><div class="k">Enhancements proposed</div><div class="n">5+</div><div class="l">to deepen the niche</div></div>
+  </div>
+  <div class="grid2" style="align-items:start;margin-top:16px">
+    <div class="card"><h3 style="color:var(--crit)">Blockers (fix first)</h3><ul class="tick bad">
+      <li><b>DSSP hard dependency</b> — a missing <code>mkdssp</code> aborts the whole run, though DSSP only feeds the final characterization step. Wrap it / ship a pure-Python fallback.</li>
+      <li><b>Hardcoded "No Mutation" control name</b> — screens whose controls are tokened UTR/Intron crash at <code>prioritize_by_sequence</code>. Let the config name the control category.</li>
+      <li><b>PPI complex mode can't take a structural-only partner</b> — a bound peptide/ligand that isn't itself tiled crashes; that's the <i>common</i> interface case. Allow a data-less partner as a pure structural neighbor.</li>
+      <li><b>Windows blockers</b> — pandas-3.x positional <code>to_csv</code> sep; <code>p&lt;0.05</code> in filenames; deep <code>ppi_partners/</code> path &gt; MAX_PATH. All one-line fixes.</li>
+    </ul></div>
+    <div class="card"><h3 style="color:var(--warn)">Correctness &amp; the sharpest science gap</h3><ul class="tick">
+      <li><b>Dropout sign is baked in.</b> BE3D assumes LOF = negative score. On an <i>activity-reporter</i> or <i>resistance-enrichment</i> screen that's inverted — and QA still "passes" (MWU/KS are direction-agnostic), so the biology can flip <b>silently</b>. Add an explicit <code>assay_direction</code> / <code>invert_score</code> flag and make QA test the correct tail.</li>
+      <li><b>Complex mode on a co-crystal ≠ interface-aware.</b> With a data-less partner it's numerically identical to monomer (cross-chain values are empty) — easy to over-assume. Document it; add an optional cross-chain contact annotation in monomer mode.</li>
+      <li><b>Silent edit drops.</b> Engineered crystal constructs (mutations + non-canonical numbering) fail the refAA match and get dropped with only a buried print. Emit an "N edits unmapped" summary.</li>
+      <li><b>"Turnkey" ≠ trusted schema.</b> A published supplement's real columns drifted from every recipe — verify the column map against a live header dump before trusting it.</li>
+    </ul></div>
+  </div>
+  <p class="note" style="margin-top:12px">These sit alongside the method-level roadmap in the <a href="#critique">Critique</a> section (distance-decay kernel, FDR/q-values, cluster-level significance, inverse-variance meta). Together they form a concrete, prioritized to-do list grounded in real use — not speculation.</p>
+</div></section>
+
+<!-- ADOPTION -->
+<section id="adopt"><div class="wrap">
+  <div class="eyebrow">Adoption into the workflow</div>
+  <h2>Library today, agent-driven tomorrow</h2>
+  <div class="grid3">
+    <div class="card"><h3>Today</h3><p>Colab for a first look (KBTBD4 template); local conda + YAML for real datasets. Friction: DSSP/MUSCLE install, no single CLI, and long chains of functions whose parameters must be kept consistent by hand.</p></div>
+    <div class="card"><h3>LLM-assisted (now)</h3><p>An LLM removes the sharpest edges with zero code change: author/validate the YAML, map arbitrary screen headers onto BE3D's columns, and translate hotspot TSVs into plain-language mechanism — <i>if</i> the tool surfaces confidence so the model doesn't over-read low-pLDDT hits.</p></div>
+    <div class="card"><h3>A "BE3D MCP"</h3><p>Expose the modular functions as typed, agent-callable tools returning small JSON summaries + artifact paths, so an agent can drive the brittle multi-step flow end-to-end.</p></div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>Sketch of the MCP tool surface</h3>
+    <div class="grid2" style="gap:6px 24px">
+      <div><code>fetch_structure(uniprot, isoform?, chain?)</code> <span class="muted">→ AF/PDB + DSSP fallback + pLDDT summary</span></div>
+      <div><code>run_screen_qc(tsv, cases, controls, col_map)</code> <span class="muted">→ MWU/KS + go/no-go verdict</span></div>
+      <div><code>build_features(struct, radius|kernel)</code> <span class="muted">→ neighbors, RSA, pLDDT, SS</span></div>
+      <div><code>compute_lfc3d(features, screens, params)</code> <span class="muted">→ per-residue LFC/LFC3D + null</span></div>
+      <div><code>call_hotspots(lfc3d, qthr, clustering)</code> <span class="muted">→ residues + clusters w/ q-values</span></div>
+      <div><code>meta_aggregate(screens[], method)</code> <span class="muted">→ consensus + I² heterogeneity</span></div>
+      <div><code>characterize(hits, features)</code> <span class="muted">→ Fisher enrichment, pLDDT/RSA</span></div>
+      <div><code>export_g2p(hits) · export_pymol(hits)</code> <span class="muted">→ portal TSV / recolor script</span></div>
+    </div>
+    <p class="note" style="margin-top:12px">Next integrations, in order: PyMOL/ChimeraX recolor export · ESMFold/Boltz for missing structures &amp; complexes · MAGeCK/BEAN upstream (counts→LFC) · cBioPortal/ClinVar overlay · AlphaMissense/ESM cross-check · a lightweight results dashboard.</p>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <p><b>Methodology.</b> This dossier was produced by an orchestrated agent team ("meta-king → queens → workers"): the BE3D repository was cloned and read at source; four parallel research agents covered the competitive landscape, personas &amp; market, cross-domain critique, and code-level design. BE3D was then <b>installed and actually run</b> — first on its KBTBD4 example, then on <b>four unfamiliar public base-editing screens</b> (KRAS, MCL1, DNMT3A + a LYZ plumbing test) via a hardened, reusable harness, each with an exhaustive parameter sweep and a full decision log. Real usage produced the novel findings above and a live <b>improvement log</b> for the tool. Backing dossiers (Q1–Q5, P2 scout + decision logs) and all raw outputs accompany this page.</p>
+  <p><b>Key sources.</b>
+    <a href="https://github.com/broadinstitute/BE3D">broadinstitute/BE3D</a> ·
+    <a href="https://g2p.broadinstitute.org/">Genomics 2 Proteins Portal</a> ·
+    G2P: <a href="https://www.nature.com/articles/s41592-024-02409-0">Nat Methods 2024</a> ·
+    ProTiler-Mut: <a href="https://www.cell.com/cell-systems/abstract/S2405-4712(26)00133-X">Cell Systems 2026</a> ·
+    KBTBD4: <a href="https://www.biorxiv.org/content/10.1101/2024.05.14.593897v1">Yeo et al.</a> ·
+    <a href="https://www.iqballab.org/">Iqbal Lab</a> · <a href="http://www.liaulab.com/publications">Liau Lab</a>.
+  </p>
+  <p class="muted">Independent capability assessment · not affiliated with or endorsed by the Broad Institute. Market figures are cited estimates; addressable-lab counts are order-of-magnitude.</p>
+</div></footer>
+
+<script>
+// ---------- DATA ----------
+const YES='<span class="yes">●</span>', NO='<span class="no">○</span>', PART='<span class="part">◐</span>';
+function mark(v){ if(v===true||v==='yes')return YES; if(v==='part'||v==='partial')return PART; if(v===false||v==='no')return NO; return '<span class="muted" style="font-size:.72rem">'+v+'</span>'; }
+
+const tools = [
+ {tool:'BE3D / beclust3d',be3d:true,cat:'BE-screen 3D interpretation',input:'BE tiling LFC',clust:true,meta:true,consv:true,null:'randomization',be:true,viz:'via G2P',open:true,maint:true},
+ {tool:'ProTiler-Mut',cat:'tiling→3D (DIRECT rival)',input:'CRISPR tiling',clust:true,meta:'multi-cond',consv:'part',null:'3D-RRA',be:false,viz:'plots',open:true,maint:true},
+ {tool:'CRISPRO',cat:'guide-score→structure map',input:'guide scores',clust:false,meta:false,consv:true,null:'limited',be:false,viz:'PyMOL out',open:true,maint:false},
+ {tool:'ProTiler',cat:'1D region calling',input:'Cas9 tiling KO',clust:false,meta:false,consv:'part',null:'region',be:false,viz:'plots',open:true,maint:false},
+ {tool:'CRISPR-SURF',cat:'1D deconvolution',input:'tiling signal',clust:false,meta:false,consv:false,null:'empirical',be:false,viz:'web+code',open:true,maint:false},
+ {tool:'BEAN',cat:'upstream BE quantification',input:'BE counts+reporter',clust:false,meta:'across guides',consv:false,null:'Bayesian',be:true,viz:'plots',open:true,maint:true},
+ {tool:'MAGeCK / VISPR',cat:'upstream screen caller',input:'sgRNA counts',clust:false,meta:'multi-cond',consv:false,null:'RRA/MLE',be:false,viz:'VISPR web',open:true,maint:true},
+ {tool:'BAGEL2',cat:'upstream essentiality',input:'sgRNA FC',clust:false,meta:false,consv:false,null:'Bayes factor',be:false,viz:'plots',open:true,maint:true},
+ {tool:'drugZ',cat:'upstream drug-gene',input:'sgRNA counts',clust:false,meta:'paired',consv:false,null:'norm Z',be:false,viz:'plots',open:true,maint:true},
+ {tool:'HotMAPS',cat:'somatic 3D hotspot',input:'somatic counts',clust:true,meta:'pan-cohort',consv:false,null:'permutation',be:false,viz:'web',open:true,maint:'part'},
+ {tool:'HotSpot3D',cat:'somatic 3D hotspot',input:'somatic counts',clust:true,meta:'pan-cohort',consv:false,null:'perm.',be:false,viz:'web server',open:true,maint:'part'},
+ {tool:'CLUMPS',cat:'somatic 3D clustering',input:'somatic freq',clust:true,meta:'pan-cancer',consv:false,null:'WAP perm.',be:false,viz:'no',open:true,maint:false},
+ {tool:'Mutation3D',cat:'somatic atomic cluster',input:'coding variants',clust:true,meta:'cohort',consv:false,null:'clustering',be:false,viz:'web server',open:true,maint:false},
+ {tool:'Oncodrive3D',cat:'somatic 3D selection',input:'somatic mutations',clust:true,meta:'cohort',consv:false,null:'selection',be:false,viz:'plots',open:true,maint:true},
+ {tool:'G2P Portal',cat:'variant→structure portal (OUTPUT target)',input:'any per-residue',clust:false,meta:false,consv:'shows',null:'no',be:false,viz:'interactive',open:true,maint:true},
+ {tool:'AlphaMissense',cat:'pathogenicity predictor (orthogonal)',input:'sequence variant',clust:false,meta:false,consv:'internal',null:'calibrated',be:false,viz:'via portals',open:true,maint:true},
+ {tool:'Missense3D',cat:'per-variant structural consequence',input:'variant+struct',clust:false,meta:false,consv:false,null:'rule-based',be:false,viz:'web',open:true,maint:'part'},
+ {tool:'BE-Hive',cat:'BE outcome predictor (upstream)',input:'target sequence',clust:false,meta:false,consv:false,null:'ML',be:true,viz:'web',open:true,maint:false},
+];
+const catGroups = {
+ 'All':()=>true,
+ 'BE-screen 3D (BE3D & rival)':t=>/3D interpretation|DIRECT rival/.test(t.cat),
+ 'Screen callers (upstream)':t=>/upstream|1D/.test(t.cat),
+ 'Somatic 3D hotspot':t=>/somatic/.test(t.cat),
+ 'Portals & predictors':t=>/portal|predictor|consequence/.test(t.cat),
+};
+
+const personas = [
+ {id:'A1',name:'Functional-genomics / CRISPR-screen PI',sector:'academic',role:'Runs pooled BE tiling screens in cancer lines',fit:5,adopt:'High',uc:'Per-residue LFC → 3D hotspots; prioritize validation'},
+ {id:'A2',name:'Base-editing method developer',sector:'academic',role:'Builds new BE screening methods/libraries',fit:5,adopt:'High',uc:'Benchmark designs; QA; meta-aggregate editors'},
+ {id:'A3',name:'Structural biologist',sector:'academic',role:'Crystallography / cryo-EM / AF modeler',fit:4,adopt:'Medium',uc:'Overlay functional data; find surfaces/interfaces'},
+ {id:'A4',name:'Cancer genomics / driver-gene lab',sector:'academic',role:'Tumor-suppressor / oncogene mechanism',fit:5,adopt:'High',uc:'Saturation screen of a driver; LOF/GOF hotspots'},
+ {id:'A5',name:'Variant-effect / clinical-genetics researcher',sector:'clinical',role:'MAVE / VUS functional evidence',fit:3,adopt:'Medium',uc:'Spatial corroboration for VUS (ACMG PS3)'},
+ {id:'A6',name:'Protein engineer / directed evolution',sector:'academic',role:'Enzyme / protein engineering',fit:3,adopt:'Medium',uc:'Map critical vs tolerant residues for libraries'},
+ {id:'A7',name:'Bioinformatics core facility',sector:'academic',role:'Services many PIs with standard pipelines',fit:4,adopt:'Medium',uc:'Turnkey screen→3D-hotspot service'},
+ {id:'A8',name:'Comp-bio / method-development lab',sector:'academic',role:'Variant-effect / structure ML',fit:3,adopt:'Medium',uc:'LFC3D as features/labels; benchmark aggregation'},
+ {id:'A9',name:'Grad student / postdoc (operator)',sector:'academic',role:'Actually runs the pipeline',fit:5,adopt:'High',uc:'Colab run; thesis/paper 3D figures'},
+ {id:'A10',name:'Cross-species / evolutionary FG lab',sector:'academic',role:'Compares screens across species',fit:3,adopt:'Medium',uc:'Cross-species conservation of hotspots'},
+ {id:'A11',name:'Drug-target-discovery academic',sector:'academic',role:'Target validation / chemical biology',fit:4,adopt:'Medium',uc:'Map hits to drug/allosteric pockets'},
+ {id:'I1',name:'Pharma target-discovery / FG group',sector:'industry',role:'Industrial screening at scale',fit:4,adopt:'Medium',uc:'Prioritize residues; consolidate internal screens'},
+ {id:'I2',name:'Base-editing therapeutics company',sector:'industry',role:'Beam / Verve / Prime / Intellia-type',fit:4,adopt:'Medium',uc:'Interpret internal BE tiling; edit-site mechanism'},
+ {id:'I3',name:'CRO offering screening services',sector:'industry',role:'Runs screens for clients',fit:4,adopt:'Medium',uc:'Premium 3D-hotspot report tier'},
+ {id:'I4',name:'Ag-bio / crop & livestock editing',sector:'industry',role:'Trait improvement by editing',fit:2,adopt:'Low',uc:'Cross-species hotspot transfer'},
+ {id:'I5',name:'Synthetic biology / enzyme firm',sector:'industry',role:'Industrial protein optimization',fit:2,adopt:'Low',uc:'Critical-residue maps for library design'},
+ {id:'I6',name:'Antibody / protein-engineering firm',sector:'industry',role:'Antibody / binder optimization',fit:2,adopt:'Low',uc:'Interface / paratope functional mapping'},
+ {id:'I7',name:'Clinical dx / variant-interpretation co.',sector:'clinical',role:'Sells VUS classification',fit:2,adopt:'Low',uc:'Spatial functional evidence in reports'},
+ {id:'I8',name:'AI-bio / techbio startup',sector:'industry',role:'ML for variant effect / function',fit:3,adopt:'Low',uc:'LFC3D features / benchmarks'},
+ {id:'I9',name:'Tool / SaaS / portal vendor',sector:'industry',role:'Structure-viewer / genomics portal',fit:3,adopt:'Medium',uc:'Integrate screen→3D-hotspot as a feature'},
+];
+
+const useCases = {
+ U1:'Prioritize residues for validation', U2:'QA / gate screen quality', U3:'Interpret driver saturation screen',
+ U4:'Find allosteric / functional surfaces', U5:'Map hits to a drug/ligand pocket', U6:'Define engineering hotspots',
+ U7:'Cross-species conservation', U8:'Meta-aggregate → consensus', U9:'Functional+spatial VUS evidence', U10:'Figures / G2P sharing'
+};
+const heatData = {
+ A1:['H','H','H','M','M','L','L','M','L','H'], A2:['H','H','M','M','L','L','M','H','M','H'],
+ A3:['M','L','M','H','H','M','M','L','L','H'], A4:['H','M','H','H','H','L','L','M','M','H'],
+ A5:['M','M','H','M','L','L','M','M','H','M'], A6:['M','L','L','M','M','H','M','L','L','M'],
+ A7:['H','H','M','M','M','M','M','H','M','H'], A8:['M','M','M','M','L','M','M','H','M','L'],
+ A9:['H','H','H','M','M','M','M','M','M','H'], A10:['M','M','M','M','L','M','H','H','L','H'],
+ A11:['H','M','H','H','H','M','L','M','L','H'], I1:['H','H','H','H','H','M','L','H','M','M'],
+ I2:['H','H','M','H','H','M','L','H','M','M'], I3:['H','H','M','M','M','M','M','H','L','H'],
+ I4:['M','M','M','M','L','H','H','M','L','M'], I5:['M','L','L','M','M','H','M','L','L','M'],
+ I6:['L','L','L','M','M','M','L','L','L','M'], I7:['M','M','H','L','L','L','M','M','H','M'],
+ I8:['M','M','M','M','L','M','M','H','M','L'], I9:['M','M','M','M','M','M','M','M','M','H'],
+};
+
+const cross = [
+ {f:'Neuroscience',t:'Cluster-based permutation (Maris-Oostenveld) · TFCE',m:'Per-voxel stat → threshold → spatial clusters → permutation null — BE3D almost line-for-line.',b:'Assign a p-value to the cluster (cluster-mass); TFCE removes the arbitrary 6&#8491; threshold entirely.'},
+ {f:'Geospatial / GIS',t:'Getis-Ord Gi* · kriging',m:'LFC3D is an un-standardized Gi* local sum on a protein point cloud.',b:'Use Gi*\'s standardized z + distance-decay weights; a Gaussian kernel with a fitted length scale instead of a hard cutoff, giving per-residue uncertainty.'},
+ {f:'Epidemiology',t:'Kulldorff spatial scan (SaTScan)',m:'Disease-cluster detection scans varying-radius windows with multiplicity-corrected Monte-Carlo.',b:'Variable-radius scan fixes BE3D\'s single-scale blind spot (misses diffuse 12&#8491; patches; over-merges adjacent 4&#8491; ones).'},
+ {f:'Genomics (ChIP-seq)',t:'MACS dynamic local λ + q-values',m:'Enriched-region calling vs a local background, with FDR.',b:'A residue-local null (not one global shuffle) + Benjamini-Hochberg q-values.'},
+ {f:'Finance',t:'Inverse-variance / empirical-Bayes shrinkage',m:'Combining many noisy signals: naive summing is dominated by reliability-weighted combiners.',b:'Weight each screen\'s meta contribution by BE-QA quality; shrink per-residue estimates toward local means.'},
+ {f:'Astronomy',t:'Source detection + deblending + sigma-clipping',m:'Smooth → local background+RMS → n·σ threshold → split merged sources.',b:'Deblend single-linkage blobs into genuine adjacent hotspots; sigma-clip outlier guides before aggregating.'},
+];
+
+// ---------- RENDER ----------
+// tool table
+const tbody=document.getElementById('toolBody');
+function renderTools(rows){
+  tbody.innerHTML=rows.map(t=>`<tr class="${t.be3d?'be3drow':''}">
+    <td class="tool">${t.tool}<span class="cat">${t.cat}</span></td>
+    <td>${t.input}</td><td>${mark(t.clust)}</td><td>${mark(t.meta)}</td><td>${mark(t.consv)}</td>
+    <td>${t.null}</td><td>${mark(t.be)}</td><td>${mark(t.viz)}</td><td>${mark(t.open)}</td><td>${mark(t.maint)}</td>
+  </tr>`).join('');
+}
+renderTools(tools);
+const cf=document.getElementById('catFilter');
+Object.keys(catGroups).forEach((k,i)=>{const b=document.createElement('button');b.className='chip';b.textContent=k;b.setAttribute('aria-pressed',i===0);b.onclick=()=>{[...cf.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');renderTools(tools.filter(catGroups[k]));};cf.appendChild(b);});
+// sort
+let sortK=null,asc=true;
+document.querySelectorAll('#toolTable thead th').forEach(th=>{th.onclick=()=>{const k=th.dataset.k;asc=sortK===k?!asc:true;sortK=k;const r=[...tbody.querySelectorAll('tr')];const rows=tools.slice().sort((a,b)=>{const av=String(a[k]),bv=String(b[k]);return asc?av.localeCompare(bv):bv.localeCompare(av);});renderTools(rows);};});
+
+// personas
+const pc=document.getElementById('pcards');
+function fitDots(n){let s='<span class="dots">';for(let i=0;i<5;i++)s+=`<i class="${i<n?'on':''}"></i>`;return s+'</span>';}
+function badge(a){const c=a==='High'?'b-high':a==='Medium'?'b-med':'b-low';return `<span class="badge ${c}">${a}</span>`;}
+function renderP(list){pc.innerHTML=list.map(p=>`<div class="pcard">
+  <div style="display:flex;justify-content:space-between;align-items:center"><span class="id">${p.id}</span><span class="sector">${p.sector}</span></div>
+  <h4>${p.name}</h4><div class="role">${p.role}</div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:2px">${fitDots(p.fit)} ${badge(p.adopt)}</div>
+  <div class="uc"><b style="color:var(--ink)">Primary:</b> ${p.uc}</div>
+</div>`).join('');}
+renderP(personas);
+const sf=document.getElementById('secFilter');
+[['All',()=>true],['Academic',p=>p.sector==='academic'],['Industry',p=>p.sector==='industry'],['Clinical',p=>p.sector==='clinical']].forEach((g,i)=>{const b=document.createElement('button');b.className='chip';b.textContent=g[0];b.setAttribute('aria-pressed',i===0);b.onclick=()=>{[...sf.children].forEach(c=>c.setAttribute('aria-pressed','false'));b.setAttribute('aria-pressed','true');renderP(personas.filter(g[1]));};sf.appendChild(b);});
+
+// heatmap
+const heat=document.getElementById('heat');
+let hh='<thead><tr><th>Persona</th>'+Object.keys(useCases).map(u=>`<th title="${useCases[u]}">${u}</th>`).join('')+'</tr></thead><tbody>';
+personas.forEach(p=>{hh+=`<tr><th style="text-align:left;font-weight:600">${p.id} <span class="muted" style="font-weight:400">${p.name.split(' / ')[0].slice(0,22)}</span></th>`+heatData[p.id].map(v=>`<td class="cell h-${v}">${v}</td>`).join('')+'</tr>';});
+heat.innerHTML=hh+'</tbody>';
+document.getElementById('ucLegend').innerHTML=Object.entries(useCases).map(([k,v])=>`<b class="mono" style="color:var(--ink)">${k}</b> ${v}`).join(' &nbsp;·&nbsp; ');
+
+// adoption bars
+const counts={High:0,Medium:0,Low:0};personas.forEach(p=>counts[p.adopt]++);
+const abars=document.getElementById('adoptBars');const max=Math.max(...Object.values(counts));
+const bcol={High:'var(--good)',Medium:'var(--warn)',Low:'var(--muted)'};
+abars.innerHTML=Object.entries(counts).map(([k,v])=>`<div class="bar"><span class="lab">${k}</span><div class="track"><div class="fill" style="width:${v/max*100}%;background:${bcol[k]}"></div></div><span class="val">${v}</span></div>`).join('');
+
+// cross-domain
+document.getElementById('crossCards').innerHTML=cross.map(c=>`<div class="card">
+  <div class="sector" style="color:var(--s1)">${c.f}</div>
+  <h4 style="margin:4px 0 8px">${c.t}</h4>
+  <p style="font-size:.82rem;margin-bottom:8px">${c.m}</p>
+  <p style="font-size:.82rem;margin:0;color:var(--ink)"><b>Borrow:</b> ${c.b}</p>
+</div>`).join('');
+
+// case study — real measured output
+document.getElementById('caseLive').innerHTML=`
+<div class="tiles" style="margin-top:0">
+  <div class="tile"><div class="k">Residues scored</div><div class="n">534</div><div class="l">chain B (26–534) · ABE+CBE screens</div></div>
+  <div class="tile"><div class="k">Meta sig. — positive</div><div class="n">160/146/122</div><div class="l">p&lt;0.05 / 0.01 / 0.001</div></div>
+  <div class="tile"><div class="k">Meta sig. — negative</div><div class="n">145/131/117</div><div class="l">p&lt;0.05 / 0.01 / 0.001</div></div>
+  <div class="tile"><div class="k">3D hotspots @6&#8491;</div><div class="n">~15 + ~11</div><div class="l">active pos + neg clusters (size≥2)</div></div>
+</div>
+<div class="grid2" style="align-items:start;margin-top:16px">
+  <div class="card"><h3>A tight positive hotspot at residues 76–95</h3>
+    <p style="font-size:.84rem">Top per-residue hits by meta SUM-LFC3D — all positive-direction (enrichment/GOF), all significant at p&lt;0.001:</p>
+    <div class="tablewrap"><table style="font-size:.8rem"><thead><tr><th>Residue</th><th>SUM LFC3D</th><th>Dir</th></tr></thead><tbody>
+      <tr><td class="mono">N93</td><td class="mono">3.77</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">L94</td><td class="mono">3.67</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">R76</td><td class="mono">3.18</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">S88</td><td class="mono">3.00</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">S92</td><td class="mono">2.96</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">M89</td><td class="mono">2.90</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">F90</td><td class="mono">2.90</td><td class="yes">pos</td></tr>
+      <tr><td class="mono">L77</td><td class="mono">2.87</td><td class="yes">pos</td></tr>
+    </tbody></table></div>
+  </div>
+  <div class="card lead-card"><h3>It re-discovers a known cancer hotspot — blind</h3>
+    <p>KBTBD4's recurrent <b>medulloblastoma gain-of-function in-frame indels</b> cluster in the Kelch β-propeller around <b>R379–R390</b>. BE3D's positive-direction 3D cluster <b>1.0</b> contains <b>B-388/389/390</b> (+397–399) and cluster 0.0 picks up B-385/386 — <b>independently recovering that functional site from screen signal alone</b>, with no prior annotation.</p>
+    <p class="note">Largest positive cluster = 58 residues (B-52–62 / 74–99 / 134–154), fusing the 76–95 peak with neighboring surface loops. The 76–95 peak sits N-terminal of the Kelch repeats — a clean follow-up candidate.</p>
+  </div>
+</div>
+<h3 style="margin-top:20px">Actual BE3D output (this run)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px">
+  <figure style="margin:0;background:#fff;border-radius:10px;padding:8px;border:1px solid var(--border)"><img src="fig_signal_bg.svg" alt="LFC3D signal vs randomization background" style="width:100%;height:auto;display:block"/><figcaption style="font-size:.72rem;color:#333;padding:5px 3px 0">LFC3D signal vs randomization background</figcaption></figure>
+  <figure style="margin:0;background:#fff;border-radius:10px;padding:8px;border:1px solid var(--border)"><img src="fig_scatter.svg" alt="LFC vs LFC3D scatter colored by significance" style="width:100%;height:auto;display:block"/><figcaption style="font-size:.72rem;color:#333;padding:5px 3px 0">LFC vs LFC3D, colored by significance (ABE)</figcaption></figure>
+  <figure style="margin:0;background:#fff;border-radius:10px;padding:8px;border:1px solid var(--border)"><img src="fig_dendro.svg" alt="Positive hotspot clustering dendrogram" style="width:100%;height:auto;display:block"/><figcaption style="font-size:.72rem;color:#333;padding:5px 3px 0">Positive hotspot dendrogram (meta, p&lt;0.05, 6&#8491;)</figcaption></figure>
+</div>
+<p class="note" style="margin-top:12px">Real run: BE3D installed in a Python 3.14 venv; Yeo ABE+CBE screens on 8VOJ chain B (UniProt Q9NVX7-2), monomer mode, 6&#8491;, nRandom=500. LFC3D, significance, meta-aggregation and 3D clustering are fully real; only the characterization step's secondary-structure/burial is placeholder (DSSP was synthesized to bypass a missing <code>mkdssp</code> binary). Three small pandas-3.x / Windows portability fixes were needed — none touch the science.</p>
+`;
+
+// theme toggle
+const tb=document.getElementById('themeBtn');const root=document.documentElement;
+tb.onclick=()=>{root.setAttribute('data-theme',root.getAttribute('data-theme')==='dark'?'light':'dark');};
+</script>
+</body>
+</html>

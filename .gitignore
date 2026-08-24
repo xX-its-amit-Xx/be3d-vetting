@@ -1,0 +1,9 @@
+# raw / licensed screen data — never redistribute (belongs to source papers)
+*.xlsx
+*.xls
+# bulky BE3D intermediate dumps
+*_rand*.tsv.gz
+*rand*.gz
+__pycache__/
+*.pyc
+.DS_Store

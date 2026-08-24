@@ -1,0 +1,55 @@
+residue	AA	drug	LFC3D_pos	pos_p	sig_level	direction	min_dist_drug_A	pLDDT	flag	note
+60	G	adagrasib	0.951	9.66e-11	0.001	positive/RESISTANCE	3.16	79.8	TP-pocket	switch-II pocket lining (3.16 A to drug)
+61	Q	adagrasib	1.14	7.25e-18	0.001	positive/RESISTANCE	3.52	79.1	TP-pocket	switch-II pocket lining (3.52 A to drug)
+62	E	adagrasib	1.679	4.18e-49	0.001	positive/RESISTANCE	2.6	76.4	TP-pocket	switch-II pocket lining (2.6 A to drug)
+63	E	adagrasib	1.679	4.18e-49	0.001	positive/RESISTANCE	3.22	78.8	TP-pocket	switch-II pocket lining (3.22 A to drug)
+64	Y	adagrasib	1.791	1.19e-57	0.001	positive/RESISTANCE	2.71	76.8	TP-pocket	switch-II pocket lining (2.71 A to drug)
+65	S	adagrasib	2.193	3.37e-94	0.001	positive/RESISTANCE	5.54	73.1	TP	validated G12Ci resistance residue S65 (Feng2022/Awad2021/Tanaka2021)
+66	A	adagrasib	2.722	3.21e-156	0.001	positive/RESISTANCE	7.55	77.6	TP-pocket	switch-II pocket lining (7.55 A to drug)
+67	M	adagrasib	1.906	3.32e-67	0.001	positive/RESISTANCE	7.36	79.8	TP-pocket	switch-II pocket lining (7.36 A to drug)
+68	R	adagrasib	1.579	4.35e-42	0.001	positive/RESISTANCE	2.79	84.8	TP	validated G12Ci resistance residue R68 (Feng2022/Awad2021/Tanaka2021)
+69	D	adagrasib	1.524	1.76e-38	0.001	positive/RESISTANCE	3.15	89.6	TP	validated G12Ci resistance residue D69 (Feng2022/Awad2021/Tanaka2021)
+70	Q	adagrasib	1.304	1.19e-25	0.001	positive/RESISTANCE	6.67	89.8	TP-pocket	switch-II pocket lining (6.67 A to drug)
+71	Y	adagrasib	0.758	1.59e-05	0.001	positive/RESISTANCE	7.22	90.4	TP-pocket	switch-II pocket lining (7.22 A to drug)
+72	M	adagrasib	0.625	4.18e-03	0.01	positive/RESISTANCE	2.72	92.6	TP	validated G12Ci resistance residue M72 (Feng2022/Awad2021/Tanaka2021)
+76	E	adagrasib	0.551	3.64e-02	0.05	positive/RESISTANCE	10.17	97.9	TP-pocket	switch-II (59-76) structural
+89	S	adagrasib	0.649	1.77e-03	0.01	positive/RESISTANCE	7.11	98.1	TP-pocket	switch-II pocket lining (7.11 A to drug)
+90	F	adagrasib	0.944	1.66e-10	0.001	positive/RESISTANCE	9.46	98.6	UNCERTAIN	no known resistance function; possible bystander/false positive
+91	E	adagrasib	1.05	3.14e-14	0.001	positive/RESISTANCE	7.45	97.8	TP-pocket	switch-II pocket lining (7.45 A to drug)
+92	D	adagrasib	0.811	9.35e-07	0.001	positive/RESISTANCE	3.66	97.0	TP	validated G12Ci resistance residue D92 (Feng2022/Awad2021/Tanaka2021)
+93	I	adagrasib	0.804	1.40e-06	0.001	positive/RESISTANCE	6.38	98.1	TP-pocket	switch-II pocket lining (6.38 A to drug)
+95	H	adagrasib	0.866	3.34e-08	0.001	positive/RESISTANCE	2.06	94.9	TP	validated G12Ci resistance residue H95 (Feng2022/Awad2021/Tanaka2021)
+96	Y	adagrasib	0.945	1.52e-10	0.001	positive/RESISTANCE	2.7	95.6	TP	validated G12Ci resistance residue Y96 (Feng2022/Awad2021/Tanaka2021)
+97	R	adagrasib	1.197	2.20e-20	0.001	positive/RESISTANCE	5.9	96.7	TP-pocket	switch-II pocket lining (5.9 A to drug)
+98	E	adagrasib	1.416	7.52e-32	0.001	positive/RESISTANCE	6.57	95.8	TP-pocket	switch-II pocket lining (6.57 A to drug)
+99	Q	adagrasib	1.225	1.05e-21	0.001	positive/RESISTANCE	3.13	94.3	TP	validated G12Ci resistance residue Q99 (Feng2022/Awad2021/Tanaka2021)
+100	I	adagrasib	1.215	3.12e-21	0.001	positive/RESISTANCE	3.23	96.7	TP-pocket	switch-II pocket lining (3.23 A to drug)
+101	K	adagrasib	0.822	5.01e-07	0.001	positive/RESISTANCE	6.22	96.8	TP-pocket	switch-II pocket lining (6.22 A to drug)
+102	R	adagrasib	1.006	1.36e-12	0.001	positive/RESISTANCE	3.15	95.9	TP-pocket	switch-II pocket lining (3.15 A to drug)
+103	V	adagrasib	0.708	1.62e-04	0.001	positive/RESISTANCE	2.92	95.4	TP-pocket	switch-II pocket lining (2.92 A to drug)
+127	T	adagrasib	0.549	3.79e-02	0.05	positive/RESISTANCE	17.6	97.7	UNCERTAIN	no known resistance function; possible bystander/false positive
+178	P	adagrasib	0.592	1.17e-02	0.05	positive/RESISTANCE		48.2	LIKELY-FP	HVR, low pLDDT (disordered) - probable artifact/passenger
+10	G	sotorasib	0.312	1.83e-02	0.05	positive/RESISTANCE	2.33	97.0	TP-pocket	switch-II pocket lining (2.33 A to drug)
+11	A	sotorasib	0.41	9.46e-05	0.001	positive/RESISTANCE	4.08	95.3	TP-pocket	switch-II pocket lining (4.08 A to drug)
+46	I	sotorasib	0.308	2.20e-02	0.05	positive/RESISTANCE	16.17	97.9	UNCERTAIN	no known resistance function; possible bystander/false positive
+47	D	sotorasib	0.451	4.78e-06	0.001	positive/RESISTANCE	13.43	97.4	UNCERTAIN	no known resistance function; possible bystander/false positive
+48	G	sotorasib	0.308	2.20e-02	0.05	positive/RESISTANCE	17.54	97.1	UNCERTAIN	no known resistance function; possible bystander/false positive
+58	T	sotorasib	0.413	7.61e-05	0.001	positive/RESISTANCE	3.17	93.4	TP	validated G12Ci resistance residue T58 (Feng2022/Awad2021/Tanaka2021)
+60	G	sotorasib	0.481	3.86e-07	0.001	positive/RESISTANCE	3.16	79.8	TP-pocket	switch-II pocket lining (3.16 A to drug)
+65	S	sotorasib	0.38	6.19e-04	0.001	positive/RESISTANCE	5.54	73.1	TP	validated G12Ci resistance residue S65 (Feng2022/Awad2021/Tanaka2021)
+66	A	sotorasib	0.792	1.22e-24	0.001	positive/RESISTANCE	7.55	77.6	TP-pocket	switch-II pocket lining (7.55 A to drug)
+67	M	sotorasib	0.466	1.43e-06	0.001	positive/RESISTANCE	7.36	79.8	TP-pocket	switch-II pocket lining (7.36 A to drug)
+68	R	sotorasib	0.37	1.07e-03	0.01	positive/RESISTANCE	2.79	84.8	TP	validated G12Ci resistance residue R68 (Feng2022/Awad2021/Tanaka2021)
+142	I	sotorasib	0.325	1.05e-02	0.05	positive/RESISTANCE	14.09	98.8	UNCERTAIN	no known resistance function; possible bystander/false positive
+147	K	sotorasib	0.334	7.02e-03	0.01	positive/RESISTANCE	16.25	97.4	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+148	T	sotorasib	0.436	1.49e-05	0.001	positive/RESISTANCE	19.15	97.2	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+149	R	sotorasib	0.436	1.49e-05	0.001	positive/RESISTANCE	19.35	97.4	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+150	Q	sotorasib	0.366	1.37e-03	0.01	positive/RESISTANCE	19.01	98.5	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+151	R	sotorasib	0.393	2.77e-04	0.001	positive/RESISTANCE	17.86	98.4	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+152	V	sotorasib	0.452	4.27e-06	0.001	positive/RESISTANCE	16.48	98.5	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+153	E	sotorasib	0.386	4.21e-04	0.001	positive/RESISTANCE	17.97	98.1	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+154	D	sotorasib	0.412	7.84e-05	0.001	positive/RESISTANCE	13.5	98.6	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+155	A	sotorasib	0.412	7.84e-05	0.001	positive/RESISTANCE	14.64	98.8	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+156	F	sotorasib	0.412	7.84e-05	0.001	positive/RESISTANCE	12.03	98.7	NOVEL-CANDIDATE	distal alpha5/SAK cluster; high pLDDT; no prior resistance annotation (hypothesis)
+178	P	sotorasib	0.498	8.74e-08	0.001	positive/RESISTANCE		48.2	LIKELY-FP	HVR, low pLDDT (disordered) - probable artifact/passenger
+179	G	sotorasib	0.523	8.26e-09	0.001	positive/RESISTANCE		49.5	LIKELY-FP	HVR, low pLDDT (disordered) - probable artifact/passenger
