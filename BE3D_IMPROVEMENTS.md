@@ -135,3 +135,160 @@ Tag severity: [BLOCKER] stops a run · [FRICTION] costs time/errors · [SCIENCE]
   depends only on the gene. Running the SAME gene many times in parallel (a parameter sweep) races on that one filename
   and on the config-copy into each output_dir. **Workaround that works:** give every run a unique *parent* dir
   (`runs/<run_id>/<gene>`) so each gets its own `be3d_configs/`. A `--config-name`/unique-suffix option would be cleaner.
+
+## Round-2 EGFR/BRAF resistance benchmark (Queen "EGFR/BRAF")
+
+- [HIGH-VALUE][interpretation] **No base-editing REACHABILITY report.** BE3D silently scores only the
+  amino-acid substitutions a CBE/ABE can install. On EGFR ~18/25 and on BRAF 12/15 curated clinical
+  resistance/driver residues receive NO signal because their alleles need transversions/indels (T790M,
+  C797S, L858R, exon19del; BRAF V600E, R509 — the latter two had ZERO guide coverage). A per-curated-
+  residue "reachable by CBE/ABE? / #guides covering" annotation (or a warning when a requested hotspot is
+  unreachable) would stop users misreading intrinsic BE limits as BE3D false negatives. This is the single
+  biggest interpretability gap for oncogene-resistance use.
+- [HIGH-VALUE][stats] **High positive base rate, no warning.** In both genes ~30–40% of scored residues are
+  called significant in the enrichment direction. The A0 discrimination test only clears chance in 1 of 3
+  drug arms (EGFR gefitinib). BE3D should print the base rate (#sig/#scored) and, ideally, an enrichment-
+  vs-null-set statistic, so "recovered residue X" isn't over-trusted.
+- [MEDIUM][structure] **Disordered/low-pLDDT residues dominate top positive hits.** EGFR's strongest
+  positive LFC3D signals are the disordered C-terminal tail (res >1000, pLDDT<50); precision@10 for the
+  functional set was ~0 because of it. A pLDDT gate or a low-confidence flag on hotspot calls would help.
+- [MEDIUM][artifact] **Contiguous single-neighborhood runs unflagged.** Robust hits often come as adjacent
+  runs (EGFR 806–812, BRAF 521–550) that may reflect a few high-LFC overlapping guides / bystander edits
+  rather than independent per-residue signal. Flagging "contiguous stretch, possible bystander" would aid
+  triage.
+- [CONFIRMED-OK] The KRAS-derived Coelho ST2 reformatting recipe (category from most_severe_consequence;
+  edits from zip(Amino_Acid_Position,Edited_AA,New_AA); ABE+CBE pooled; positive=resistance) ported cleanly
+  to EGFR and BRAF (BRAF refAA-vs-UniProt mismatch only 1.9%). z-score columns are NOT gene-specific — every
+  gene carries all cell-line×drug arms; pick the arm by the clinically matched cell line (PC9→EGFR, HT29→BRAF).
+- [CONFIRMED-OK] Unlike KRAS (resistance-only, null QA), EGFR/BRAF KS-H1 is strongly significant
+  (D=0.37 p=4e-52; D=0.26 p=6e-14) because the target is essential in the matched line — QA gate passes.
+
+## Run: MAP2K1 / MAP2K2 (MEK1/MEK2, trametinib resistance) — Queen "MEK1/MEK2"
+- [POSITIVE] The Coelho ST2 schema + `convert_kras.py` template transferred cleanly to two new genes
+  (MEK1/MEK2): only 0.9% of guides dropped on the refAA-vs-structure sanity check. Reconstructing the
+  reference sequence FROM the AlphaFold PDB (not a separately-downloaded FASTA) guarantees screen numbering
+  == structure numbering and removes a whole class of off-by-one/isoform bugs — recommend baking this into
+  `prep_target.py` (emit a `<uniprot>.seq` from the PDB it just downloaded).
+- [FRICTION] Output-tree shape differs between harness invocations: the KRAS runs nested outputs under
+  `runs/<id>/<GENE>/...` but these MEK runs put them directly under `runs/<id>/...` (LFC3D/, etc.). Any
+  downstream parser must glob for `**/LFC3D/*NonAggr_LFC3D.tsv` rather than assume a `<GENE>/` level.
+- [FRICTION] Column-prefix is `<GENE>_<screen-stem>` (e.g. `MAP2K1_Tram`), derived from the staged TSV
+  filename, NOT documented. Robust parse = strip the `_LFC3D_pos` suffix off the first matching column
+  (as `robust.py` does). A machine-readable `columns.json` in the output would remove the guesswork.
+- [DISCRIMINATION / high base rate] On these resistance screens BE3D calls a LARGE fraction significant in
+  the positive direction: MEK1 13–20%, **MEK2 24–32%** of all residues (p<0.001→p<0.05). Per the A0 spec
+  this makes p<0.05 overlaps weak evidence. Two concrete asks: (a) report the base rate in the run summary
+  so users see it, and (b) the null appears not to control the positive-tail FDR well when a broad swath of
+  the protein is mildly enriched (paralog MEK2 far worse than MEK1 on the SAME drug/pipeline) — worth a
+  look at whether the per-residue randomization is too permissive for enrichment (vs dropout) screens.
+- [FALSE-POSITIVE geometry] The dominant FP mode was low-pLDDT regions: MEK1 284–287 (αF–αG loop, pLDDT
+  40–46) and MEK2 N-terminal 1–32 (disordered) were robustly "significant" across the sweep. BE3D already
+  writes pLDDT in characterization but does NOT down-weight or flag hotspots in low-pLDDT geometry.
+  Recommend an automatic `low_pLDDT` flag (e.g. mean neighborhood pLDDT<60) on each called hotspot.
+- [QA direction] Unlike the KRAS resistance arms (null QA), the MEK trametinib arms gave SIGNIFICANT KS
+  (MEK1 D=0.21 p=1.9e-5; MEK2 D=0.19 p=6.2e-6) because MEK is essential downstream of BRAF-V600E in HT29,
+  so knockouts DO move vs neutrals. Good reminder that the standard dropout-style QA gate is sometimes
+  informative and sometimes null on resistance screens depending on target essentiality — the tool should
+  not treat a null KS as a hard fail.
+- [FEATURE REQUEST] The most valuable cross-target analysis here (paralog spatial conservation of the
+  escape surface) required a hand-rolled Biopython superposition + ligand transfer. A built-in
+  "map hotspots of gene A onto structure of paralog B (via alignment+superpose)" utility would be a natural
+  BE-MetaClust3D companion for paralog/ortholog studies.
+
+## BCL2 / MYC run (Queen "BCL2/MYC" round 2; Coelho essentiality / Control arms)
+- [BLOCKER-for-purpose][data] **The shipped "Coelho = venetoclax/BCL2" assumption is wrong.** The MOESM4
+  `ST2 BE z-scores` sheet has **no venetoclax/navitoclax arm** (drug arms: HT29 DebCet/Tram/Pict, H23
+  Adag/Sotor, PC9 Osim/Gefit, MHHES1 Olap/Nirap). BCL2 (5,562 guides) and MYC (2,498) are tiled but the only
+  target-relevant readout is **essentiality via the per-line Control (no-drug) arms**. **Lesson/fix:** a
+  pre-flight "does an assay arm relevant to this target exist, and is the target essential/altered in the
+  screened line?" check would flag un-runnable-for-purpose targets (BCL2: not essential in HT29/H23/PC9 →
+  nonsense guides *enrich*, no functional window) before a full sweep is spent.
+- [SCIENCE][calibration][HIGH] **Base rate / over-call on weak- or null-signal inputs.** On BCL2 (a genuine
+  null: no venetoclax, non-essential) BE3D calls **~50% of scored residues** significant at p<0.05 and ~95% of
+  "robust" (≥3/4-run) hotspots are false positives; groove enrichment OR<1. Even on MYC (real essentiality)
+  the base rate is ~32%. The raw p<0.05 randomization threshold is **not a usable prioritizer** — it needs an
+  **effect-size floor + FDR/BH correction + an explicit base-rate report** in `RUN_COMPLETED.txt` so a user
+  sees "K sig / N scored = X%" and is warned when X is high (per the A0 spec). Magnitude/rank + the
+  independent enrichment test are what actually discriminate.
+- [SCIENCE][resolution] **Domain-level, not residue-level, on compact folds.** On MYC's bHLH-LZ, BE3D cleanly
+  separates the folded functional domain from the IDR (OR 5.8–9.9, p→3e-7, 4× gap) BUT **within** the domain
+  does not resolve DNA/MAX contacts from neighbours (within-domain enrichment ≈ chance) — a 6 Å neighborhood
+  smears signal across a small helical bundle. Worth documenting as an expected limit; an adaptive/smaller
+  radius or per-residue (not neighborhood-summed) channel might sharpen compact domains.
+- [SCIENCE][value-add, positive] **BE3D recovers low-pLDDT functional boxes a folding/AlphaMissense baseline
+  misses** — MYC MBI (60-65) and all of MBII (145-158) are robustly significant despite pLDDT 51-59. This is
+  the genuine edge over "is it folded" (folded R/E=3.45 beats BE3D's ~2 on the *whole-protein* contact set, but
+  cannot see the disordered boxes). Keep/showcase this behaviour.
+- [FRICTION][numbering] **MYC 454-vs-439 frame trap.** `AF-P01106-F1-model_v6` and the Coelho screen are the
+  **454-aa CUG-initiated MYC1** frame; literature/1NKP/AlphaMissense are **439-aa** (canonical-454 = 439 + 15).
+  The screen matched AF at offset 0 (so BE3D I/O is self-consistent in 454), but every external ground-truth
+  residue needed +15. A `structureid`↔`screen`↔`UniProt-canonical` frame reconciliation report would prevent
+  silent 15-residue mis-annotation.
+- [CONFIRM] `--qa-controls "No Mutation" Silent` parses the two-word token correctly (KS file header shows
+  `Nonsense_Splice-donor_vs_No Mutation_Silent`); the sibling-`be3d_configs/` per-run-parent-dir workaround
+  again avoided the shared-config race across an 8-run sweep.
+
+## Round-2 PI3K/AKT run (PIK3CA P42336, AKT1 P31749; Coelho 2024 screen) — issues & findings
+- [SCIENCE][base-editing reachability — the dominant limiter, again] The screen simply cannot install the
+  #1 oncogenic hotspots. **PIK3CA H1047R/H1047L, M1043, G1049, H1065, C420, E418 have NO guide** (kinase +
+  some C2 hotspots unreachable by CBE/ABE). **AKT1 E17K is not installed** — codon 17 only yields the
+  non-activating **E17G** (ABE A>G), never oncogenic E17K (needs G>A); T308 also unreachable. BE3D is
+  structurally blind to these by construction. A **reachability report** (per validated-hotspot: is the
+  required codon change achievable by the editors in the library? which substitution IS installed?) would
+  stop users mistaking an editor gap for a biological negative, and flag "wrong-substitution" traps like
+  E17K→E17G. This is now the recurring #1 caveat across KRAS/MYC/PIK3CA/AKT1.
+- [SCIENCE][base-rate blowup on compact folds, confirmed on AKT1] AKT1 (480 aa) p<0.01 base rate = 24%
+  (r6), rising to 31% at r8; union enrichment < 1 (below chance) and the **discrimination gap inverts**
+  (tolerant hit-rate 0.24 > functional 0.11). When the input screen is near-null (no on-target drug),
+  6–8 Å neighborhood aggregation over a small fold paints ~25% of residues as "hotspots." The
+  `RUN_COMPLETED.txt` should print base rate + a loud warning above ~15–20%, and ideally refuse to emit a
+  "hotspot list" when union enrichment vs an independent functional set is not > 1.
+- [SCIENCE][value-add is drug-DIRECTIONALITY, not recall] On PIK3CA, BE3D does NOT beat AlphaMissense on
+  functional-residue recall (AM R/E 2.29 p 1e-5 vs BE3D union R/E 1.7 p 0.15, n.s.). Its genuine edge is
+  that the **screen signal is drug-directional**: under trametinib (MEK bypass) the resistance hotspots
+  concentrate on the **activating helical E542/E545 nSH2 interface (ACT R/E 2.9–3.6, p 0.008–0.02)** and
+  the ATP/drug pocket is silent (POCKET R/E = 0), whereas under the on-target pictilisib there is NO signal
+  anywhere. AlphaMissense scores all of these uniformly pathogenic and cannot make that distinction.
+  Recommend BE3D lead its characterization with the **functional-subset-resolved** enrichment (activating
+  vs pocket vs catalytic), not a single whole-protein number — that split is where it actually informs.
+- [SCIENCE][mean >> sum on these screens] `function_for_lfc3d=sum` inflated base rate and DESTROYED the
+  activating-hotspot enrichment on PIK3CA (r6_sum ACT R/E 1.8 vs mean 3.6; union dropped below 1). Mean is
+  the safer default for aggregating multi-guide neighborhoods; sum over-weights dense-coverage regions.
+- [DATA-SCHEMA] Reconfirmed: Coelho ST2 category lives in `most_severe_consequence` (not
+  `variant_classification`); drug arms are shared across all tiled genes, so a target gene (PIK3CA/AKT1)
+  is scored under drugs that don't target it — the informative arm must be chosen by pathway logic
+  (PIK3CA: pictilisib on-target = null, trametinib bypass = signal). The brief's assumption that each gene
+  has a matched inhibitor (alpelisib/capivasertib) is WRONG for this file — those drugs are absent.
+- [CONFIRM] 16-run sweep (2 genes × 2 arms × 4 configs) all EXITCODE 0 / RUN_COMPLETED SUCCESS; the
+  per-run-parent `be3d_configs/` workaround again prevented the shared-YAML race; DSSP placeholder fine.
+
+## PARP1 / PARP2 run (round 2 — olaparib/niraparib resistance, Coelho 2024)
+- [SCIENCE][direction matters: essentiality is recovered, resistance is not] On PARP1, BE3D's **negative
+  (depletion)** direction cleanly re-finds the catalytic NAD+/inhibitor pocket + HD autoinhibitory helix
+  (hypergeometric p ≈ 1e-10, all 12 pocket residues, beats burial AND AlphaMissense: R/E 6.1 vs 2.9 vs 2.0).
+  But the **positive (resistance)** direction — the biologically interesting one — has base rate 10–28% and
+  does NOT beat chance/AlphaMissense (olaparib R/E 0.7–1.1 n.s.; AlphaMissense R/E 2.1 p 5e-6). BE3D should
+  report enrichment **per direction AND per functional-subset** (catalytic-depletion vs resistance-enrichment);
+  a single whole-protein number hides that it wins on essentiality and loses on resistance specificity.
+- [DATA-SCHEMA][PARP inhibitors present ≠ brief] The Coelho ST2 file contains ONLY **olaparib (Olap) and
+  niraparib (Nirap)** for PARP1/PARP2 (cell line MHH-ES-1, **ABE only**, 2104/809 guides). There is **no
+  talazoparib or rucaparib** arm — the brief's four-inhibitor comparison is not possible from this dataset.
+  Any turnkey recipe should print available `L2FC_*zscore` arms per gene, not assume a fixed inhibitor panel.
+- [DATA-SCHEMA][SILENT numbering offset — high-risk] PARP2 `Amino_Acid_Position` is numbered in a
+  **canonical−13 short-isoform frame**; a naive canonical mapping gave only **14% refAA match** (looks like
+  noise, not an offset — the per-offset histogram was flat at ±5). Only a wider offset scan revealed +13 →
+  **86% match**. BE3D silently drops refAA-mismatched edits, so this would have quietly gutted PARP2 coverage
+  with no error. **Recommend BE3D emit a refAA-match-rate report and auto-suggest an integer offset** when the
+  match rate is low but a single shift recovers it (isoform-frame detection).
+- [SCIENCE][coverage/power gates discrimination] PARP2 (ABE-only, 809 guides, ~200/583 residues scored) FAILS
+  discrimination entirely (catalytic R/E ≈ 1, p 0.3; precision@10 = 0; loses to AlphaMissense), while PARP1
+  (2104 guides) succeeds on the same pocket. Same tool, same pocket, different power. A **coverage/power
+  warning** (e.g. "<X% of the domain tiled → discrimination unreliable") in RUN_COMPLETED would prevent
+  over-reading under-powered targets.
+- [SCIENCE][per-inhibitor 3D maps are breadth-different, not cleanly drug-specific] Olaparib vs niraparib
+  positive maps: Jaccard 0.22 (PARP1) / 0.33 (PARP2). The contrast is niraparib producing a ~2× broader
+  DNA-binding-centric hotspot, not an orthosteric-vs-distal split like KRAS sotorasib/adagrasib. High base
+  rate blurs per-drug geometry; lower/adaptive thresholds may be needed to resolve drug-specific signatures.
+- [CONFIRM] 16-run sweep (2 genes × 2 arms × 4 configs) all EXITCODE 0 / RUN_COMPLETED SUCCESS; PARP2 BE-QA
+  KS is significant (D=0.28, p=1.3e-4) — a genuine pass; per-run-parent `be3d_configs/` workaround again
+  avoided the shared-YAML race; DSSP placeholder fine (characterization-only).

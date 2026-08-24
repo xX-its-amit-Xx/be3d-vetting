@@ -545,10 +545,15 @@
 <!-- VALIDATION SCORECARD + OUTREACH -->
 <section id="validate"><div class="wrap">
   <div class="eyebrow">Honest validation · does it discriminate, or call everything?</div>
-  <h2>Benchmarked against ground truth — with the failures shown</h2>
-  <p style="max-width:880px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So for each user package we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and — critically — whether BE3D <b>beats a trivial baseline</b> (just calling buried residues, or AlphaMissense). The verdicts below are deliberately uneven. Each links to the full, reproducible benchmark.</p>
-
-  <div class="callout warnc">Consistent finding across targets: BE3D's <b>base rate swings from ~13% (KRAS) to 37–45% (TP53/MCL1/DNMT3A)</b> — so its raw p&lt;0.05 flag can't be trusted uniformly; <b>you must rank</b>. That's the concrete cost of its missing FDR/q-values.</div>
+  <h2>Benchmarked on 16 targets — with the failures shown</h2>
+  <p style="max-width:900px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So across <b>16 real base-editing screens</b> we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and whether BE3D <b>beats a trivial baseline</b> (buried residues, or AlphaMissense). The verdict distribution is deliberately, honestly mixed — about a third genuine, a third qualified, a third negative.</p>
+  <div class="tiles" style="margin-top:0">
+    <div class="tile"><div class="k">Real screens benchmarked</div><div class="n">16</div><div class="l">genes · 17 target·drug arms</div></div>
+    <div class="tile"><div class="k">Genuine signal</div><div class="n" style="color:var(--good)">~6</div><div class="l">beats chance &amp; a baseline</div></div>
+    <div class="tile"><div class="k">Qualified</div><div class="n" style="color:var(--warn)">~6</div><div class="l">real but loses to AlphaMissense / noisy</div></div>
+    <div class="tile"><div class="k">Honest negatives</div><div class="n" style="color:var(--serious)">~5</div><div class="l">no signal / over-call — flagged "don't use"</div></div>
+  </div>
+  <div class="callout warnc">Two limits dominate — and neither is the algorithm. <b>(1) Base-editing reachability:</b> many gold-standard residues cannot be made by CBE/ABE at all (EGFR T790M/C797S/L858R, BRAF V600, PIK3CA H1047R, AKT1 E17K, DNMT3A R882) — so BE3D's "misses" are the <i>assay's</i>, not the tool's. <b>(2) Selection pressure:</b> BE3D is only as good as the screen — give it one with no matching drug arm (BCL2, AKT1) and it returns noise, loudly (base rate up to ~50%). Base rates span ~7–50%, so <b>you must rank</b> (its missing FDR).</div>
 
   <div class="tablewrap"><table id="valTable"><thead><tr>
     <th>Target · user</th><th>Base rate</th><th>Enrichment vs chance</th><th>Discrimination gap</th><th>Beats trivial baseline?</th><th>Honest verdict</th>
@@ -556,22 +561,37 @@
 
   <div class="grid2" style="align-items:start;margin-top:18px">
     <div class="card"><h3 style="color:var(--good)">Where BE3D genuinely adds signal</h3><ul class="tick good">
-      <li><b>Druggable but not point-mutated targets</b> — MCL1 is amplification-driven, so somatic 3D-hotspot tools (3dhotspots.org) return <i>nothing</i>; a functional screen is the only 3D map.</li>
-      <li><b>Drug-escape geometry</b> — KRAS adagrasib resistance (8/9 known residues, 5.6× chance): recurrence tools only see the activating G12/G13/Q61 codons, an orthogonal axis.</li>
-      <li><b>Effect direction &amp; editor-accessible proxies</b> — LOF vs GOF, and interface patches (DNMT3A) that stand in for base-edit-inaccessible clinical sites.</li>
+      <li><b>Druggable but not point-mutated targets</b> — MCL1 is amplification-driven, so somatic 3D-hotspot tools return <i>nothing</i>; a functional screen is the only 3D map.</li>
+      <li><b>Drug- &amp; direction-specific escape geometry</b> — KRAS adagrasib (8/9 known residues, 5.6× chance) and the MEK1 allosteric shell: recurrence tools see only activation codons; AlphaMissense is drug-agnostic.</li>
+      <li><b>Disordered functional regions</b> — on MYC, BE3D recovers the low-pLDDT MBI/MBII boxes that AlphaMissense and folding-based baselines <i>miss</i>.</li>
+      <li><b>Essentiality cores via dropout</b> — PARP1's depletion direction recovers the NAD⁺ catalytic pocket, beating AlphaMissense (6.1× vs 2.9×).</li>
     </ul></div>
     <div class="card"><h3 style="color:var(--crit)">Where it doesn't (shown, not hidden)</h3><ul class="tick bad">
-      <li><b>AlphaMissense out-discriminates it on conserved cores</b> — on TP53, AM ranks the DNA-binding core better (OR 55 vs 33).</li>
-      <li><b>It can't beat "is it folded?"</b> — on BRCA1 the domain signal is fully recapitulated by a pLDDT&gt;70 baseline; residue-level agreement with Findlay SGE is ~0 (ρ≈0.05) with real false positives.</li>
-      <li><b>Unproven ≠ absent</b> — KRAS sotorasib shows no significant pocket enrichment; that finding is labeled a hypothesis, not a win.</li>
-      <li><b>Blind spots</b> — base editing can't reach some validated residues at all (DNMT3A R882; ~half of MCL1's functional set) → false negatives, complementary to predictors.</li>
+      <li><b>AlphaMissense out-ranks it on conserved folded cores</b> — TP53, PIK3CA, PARP1-resistance: for raw pathogenicity recall, use AM.</li>
+      <li><b>It can't beat "is it folded?"</b> — on BRCA1 the domain signal is fully recapitulated by a pLDDT&gt;70 baseline; residue agreement with Findlay SGE is ~0 (ρ≈0.05), with real false positives.</li>
+      <li><b>It over-calls</b> — base rate to ~50%; low-pLDDT, disordered, and terminal false positives are common → rank + pLDDT-filter, never trust the raw flag.</li>
+      <li><b>Reachability blind spots</b> — many validated residues can't be base-edited at all (R882, V600, H1047R, E17K, T790M) → structural false negatives, complementary to predictors.</li>
     </ul></div>
   </div>
 
+  <div class="card" style="margin-top:16px;border-color:color-mix(in srgb,var(--serious) 40%,var(--border))">
+    <h3 style="color:var(--serious)">When NOT to use BE3D (learned the hard way)</h3>
+    <div class="grid2" style="gap:2px 24px">
+      <ul class="tick bad" style="margin:0">
+        <li><b>The screen lacks the matching selection.</b> BCL2 with no venetoclax arm (and non-essential in the lines) → anti-enriched noise at ~50% base rate. AKT1 with no AKT-inhibitor arm → discrimination inverts. Garbage-in, loudly.</li>
+        <li><b>The key residues aren't base-editable.</b> If a target's biology hinges on transversion/indel hotspots (EGFR C797S/T790M, BRAF V600), a base-editing screen can't reach them — a predictor (AlphaMissense) is the right tool.</li>
+      </ul>
+      <ul class="tick bad" style="margin:0">
+        <li><b>You need residue-level VUS calls.</b> On BRCA1, per-residue agreement with SGE was ~0 — BE3D is domain-level, complementary PS3-type evidence, not a standalone classifier.</li>
+        <li><b>The screen is underpowered.</b> PARP2 (ABE-only, ~200 residues), plain dropout arms with one nonsense guide → no signal; check QA and coverage first.</li>
+      </ul>
+    </div>
+  </div>
+
   <h3 style="margin-top:30px">For your lab — copyable packages</h3>
-  <p style="max-width:860px">Each target ships a ready-to-send email, a 1-page brief, a hotspot table with per-residue <b>TP / novel-candidate / false-positive</b> flags, and a Genomics 2 Proteins Portal TSV for interactive 3D viewing — all in the repo, honest about caveats, with an optional invitation to share validation results back for tuning.</p>
+  <p style="max-width:880px">All <b>16 targets</b> ship a shareable package in the repo (<a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/outreach">outreach/</a>): a ready-to-send email, a 1-page brief, a hotspot table with per-residue <b>TP / novel-candidate / false-positive</b> flags, and a Genomics 2 Proteins Portal TSV for interactive 3D viewing — honest about caveats (including the "don't use it here" negatives), with an optional invitation to share validation results back for tuning. Five featured:</p>
   <div class="grid3" id="outreachCards"></div>
-  <p class="note" style="margin-top:14px">Reproduce any run: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/research">research/P2_run_*.md &amp; P2_user_*.md</a> · harness in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/harness">harness/</a> · figures in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/figures">figures/</a>.</p>
+  <p class="note" style="margin-top:14px">Reproduce any run: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/research">research/P2_run_*.md, P2_user_*.md &amp; P2_analysis_*.md</a> · harness in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/harness">harness/</a> · every target's package in <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main/outreach">outreach/</a>.</p>
 
   <script>
   (function(){
@@ -579,12 +599,23 @@
     const TREE='https://github.com/xX-its-amit-Xx/be3d-vetting/tree/main';
     const V={good:'var(--good)',mixed:'var(--warn)',warn:'var(--serious)'};
     const val=[
-      {t:'KRAS · adagrasib',u:'G12C med-chem',base:'15.9%',enr:'5.6× · OR 57 · p=1.4e-6',gap:'45% vs 1.9% (24×)',bl:'✓ beats burial',verdict:'Strong — 8/9 known resistance residues, zero-shot',v:'good',doc:'research/P2_user_KRAS.md'},
-      {t:'KRAS · sotorasib',u:'G12C med-chem',base:'12.7%',enr:'NS (p=0.51)',gap:'1.4×',bl:'—',verdict:'Unproven — distal α5 result is a hypothesis, not a recovery',v:'warn',doc:'research/P2_user_KRAS.md'},
-      {t:'TP53',u:'driver-gene lab',base:'36%',enr:'2.63× · p=4.2e-7',gap:'94% vs 14%',bl:'✓ burial · ✗ AlphaMissense',verdict:'Discriminates, but AlphaMissense out-ranks the conserved core',v:'mixed',doc:'research/P2_user_TP53.md'},
-      {t:'MCL1 · drug arms',u:'BH3-mimetic dev',base:'~40%',enr:'OR ∞ · p≈6e-4',gap:'100% vs 12.5% (8×)',bl:'✓ beats burial &amp; AM',verdict:'Strong — and the only 3D map (MCL1 not point-mutated)',v:'good',doc:'research/P2_user_MCL1.md'},
-      {t:'DNMT3A',u:'epigenetics / AML',base:'37%',enr:'OR ~12 · p≈1e-11',gap:'83% vs 24%',bl:'✓ beats burial',verdict:'Discriminates on rank; blind to R882 (not base-editable)',v:'good',doc:'research/P2_user_DNMT3A.md'},
-      {t:'BRCA1',u:'clinical / VUS',base:'7.4%',enr:'3.1× · OR 4.3 · p=6e-8',gap:'domain-level only',bl:'✗ ties "is it folded"',verdict:'Domain-level only; weak residue resolution; real FPs vs Findlay SGE',v:'warn',doc:'research/P2_user_BRCA1.md'},
+      {t:'MCL1 · drug arms',u:'BH3-mimetic dev',base:'~40%',enr:'OR ∞ · p≈6e-4',gap:'100% vs 12.5%',bl:'✓ burial &amp; AM',verdict:'Strong — and the only 3D map (MCL1 not point-mutated)',v:'good',doc:'research/P2_user_MCL1.md'},
+      {t:'KRAS · adagrasib',u:'G12C med-chem',base:'15.9%',enr:'5.6× · OR 57 · p=1.4e-6',gap:'45% vs 1.9%',bl:'✓ burial',verdict:'Strong — 8/9 known resistance residues, zero-shot',v:'good',doc:'research/P2_user_KRAS.md'},
+      {t:'PARP1 · essentiality',u:'DDR / synthetic-lethal',base:'10–28%',enr:'6.1× · p≈3e-10',gap:'catalytic pocket',bl:'✓ beats AM (2.9)',verdict:'Strong on the dropout/essential direction (recovers NAD+ pocket)',v:'good',doc:'research/P2_analysis_PARP1.md'},
+      {t:'DNMT3A',u:'epigenetics / AML',base:'37%',enr:'OR ~12 · p≈1e-11',gap:'83% vs 24%',bl:'✓ burial',verdict:'Discriminates on rank; blind to R882 (not editable)',v:'good',doc:'research/P2_user_DNMT3A.md'},
+      {t:'MYC',u:'undruggable TF',base:'~32%',enr:'2.1× · OR 6–10 · p≈8e-6',gap:'4× (folded vs IDR)',bl:'✓ edge on disordered MBI/MBII',verdict:'Passes at domain level; recovers disordered functional boxes AM misses',v:'good',doc:'research/P2_analysis_MYC.md'},
+      {t:'MEK1 · trametinib',u:'MAPK resistance',base:'13–20%',enr:'OR 6–9 · p&lt;1e-4',gap:'5×',bl:'✗ AM (drug-agnostic)',verdict:'Genuine but modest — allosteric-pocket shell; adds drug direction',v:'good',doc:'research/P2_analysis_MAP2K1.md'},
+      {t:'TP53',u:'driver-gene lab',base:'36%',enr:'2.63× · p=4.2e-7',gap:'94% vs 14%',bl:'✓ burial · ✗ AM',verdict:'Discriminates, but AlphaMissense out-ranks the conserved core',v:'mixed',doc:'research/P2_user_TP53.md'},
+      {t:'PIK3CA · bypass',u:'PI3K resistance',base:'7–14%',enr:'helical 2.9–3.6× · p≈.01',gap:'pocket silent',bl:'✗ AM (2.29)',verdict:'Finds activation/bypass geometry, not pocket; H1047R unreachable',v:'mixed',doc:'research/P2_analysis_PIK3CA.md'},
+      {t:'MEK2 · trametinib',u:'MAPK resistance',base:'24–32%',enr:'OR 3–4 · p&lt;1e-3',gap:'5–9×',bl:'needs p&lt;.001+pLDDT',verdict:'Positive but noisy (N-term over-call); escape surface conserved w/ MEK1',v:'mixed',doc:'research/P2_analysis_MAP2K2.md'},
+      {t:'BRAF · dab+cetux',u:'MAPK resistance',base:'~39%',enr:'2.1× · p=0.23 (ns)',gap:'underpowered',bl:'—',verdict:'Underpowered (V600 unreachable) but a real hypothesis: L505 dimer interface',v:'mixed',doc:'research/P2_analysis_BRAF.md'},
+      {t:'EGFR · gefitinib',u:'RTK resistance',base:'~40%',enr:'3.28× · OR 18.5 · p=1.5e-3',gap:'αC/exon20 face',bl:'✓ burial',verdict:'Weak-positive: only the reachable αC/exon20 compartment; C-term FP',v:'mixed',doc:'research/P2_analysis_EGFR.md'},
+      {t:'BRCA1',u:'clinical / VUS',base:'7.4%',enr:'3.1× · p=6e-8',gap:'domain-level only',bl:'✗ ties "is it folded"',verdict:'Domain-level only; weak residue resolution; real FPs vs Findlay SGE',v:'warn',doc:'research/P2_user_BRCA1.md'},
+      {t:'KRAS · sotorasib',u:'G12C med-chem',base:'12.7%',enr:'NS (p=0.51)',gap:'1.4×',bl:'—',verdict:'Unproven — distal α5 is a hypothesis, not a recovery',v:'warn',doc:'research/P2_user_KRAS.md'},
+      {t:'EGFR · osimertinib',u:'RTK resistance',base:'~40%',enr:'1.3× (p=0.49)',gap:'—',bl:'✗',verdict:'Fails — C797S/covalent-site escapes are base-edit-inaccessible',v:'warn',doc:'research/P2_analysis_EGFR.md'},
+      {t:'PARP2',u:'DDR',base:'high',enr:'~1× (p=0.3)',gap:'0',bl:'✗ loses to AM',verdict:'Fails — underpowered (ABE-only, ~200 residues scored)',v:'warn',doc:'research/P2_analysis_PARP2.md'},
+      {t:'AKT1',u:'PI3K/AKT',base:'24–29%',enr:'&lt;1× (p≈0.97)',gap:'inverted',bl:'✗',verdict:'Honest negative — no AKT-inhibitor arm; E17K unreachable. Do not use.',v:'warn',doc:'research/P2_analysis_AKT1.md'},
+      {t:'BCL2',u:'apoptosis',base:'~50%',enr:'anti (OR 0.31)',gap:'—',bl:'✗ loses to all',verdict:'Clean negative — no venetoclax arm + not essential → no signal to find',v:'warn',doc:'research/P2_analysis_BCL2.md'},
     ];
     document.getElementById('valBody').innerHTML=val.map(r=>`<tr>
       <td class="tool">${r.t}<span class="cat">${r.u}</span></td>

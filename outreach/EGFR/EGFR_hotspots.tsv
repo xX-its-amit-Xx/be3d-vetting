@@ -1,0 +1,51 @@
+residue	AA	LFC3D_pos	persistence	nAFruns	pLDDT	subset	flag
+258	A	1.343	5	7	90.1		NOVEL/tail
+484	S	1.089	5	7	77.0		NOVEL/tail
+485	G	0.967	5	7	81.1		NOVEL/tail
+708	K	1.395	6	7	81.8		NOVEL/tail
+709	E	1.747	5	7	81.3	activating	TP
+710	T	1.462	6	7	82.9		NOVEL/tail
+769	V	2.771	5	7	78.8	exon20ins	TP
+770	D	2.352	6	7	81.4	exon20ins	TP
+806	K	1.385	6	7	87.9		NOVEL-candidate
+807	D	1.082	7	7	84.6		NOVEL-candidate
+808	N	1.12	7	7	84.7		NOVEL-candidate
+809	I	1.433	6	7	87.8		NOVEL-candidate
+810	G	1.778	7	7	88.5		NOVEL-candidate
+811	S	1.521	6	7	91.9		NOVEL-candidate
+812	Q	1.18	5	7	90.7		NOVEL-candidate
+984	D	1.066	7	7	79.1		FP(tolerant)
+985	E	0.914	7	7	64.4		NOVEL/tail
+986	R	0.836	7	7	59.9		NOVEL/tail
+987	M	1.433	6	7	63.2		NOVEL/tail
+988	H	0.524	5	7	57.5		NOVEL/tail
+1004	E	1.128	7	7	47.2		FP-risk(pLDDT<50)
+1005	E	1.261	7	7	46.9		FP-risk(pLDDT<50)
+1006	D	1.313	7	7	46.7		FP-risk(pLDDT<50)
+1007	M	1.064	6	7	50.2		NOVEL/tail
+1008	D	0.595	5	7	48.3		FP-risk(pLDDT<50)
+1009	D	0.921	6	7	56.0		NOVEL/tail
+1010	V	1.67	7	7	56.8		NOVEL/tail
+1011	V	3.317	7	7	60.8		NOVEL/tail
+1012	D	4.802	7	7	65.3		NOVEL/tail
+1013	A	3.74	7	7	62.4		NOVEL/tail
+1014	D	3.599	7	7	62.6		NOVEL/tail
+1015	E	3.444	7	7	62.8		NOVEL/tail
+1016	Y	2.259	7	7	59.2		NOVEL/tail
+1017	L	2.251	6	7	58.2		NOVEL/tail
+1018	I	1.622	5	7	50.0		NOVEL/tail
+1020	Q	0.781	7	7	33.9		FP-risk(pLDDT<50)
+1021	Q	1.03	5	7	33.9		FP-risk(pLDDT<50)
+1022	G	0.965	7	7	31.3		FP-risk(pLDDT<50)
+1023	F	0.871	6	7	29.1		FP-risk(pLDDT<50)
+1028	S	0.521	6	7	29.5		FP-risk(pLDDT<50)
+1029	T	0.464	6	7	32.2		FP-risk(pLDDT<50)
+1096	S	1.831	7	7	34.2		FP-risk(pLDDT<50)
+1097	V	1.831	7	7	31.2		FP(tolerant)
+1098	P	2.482	7	7	38.2		FP-risk(pLDDT<50)
+1158	A	0.463	5	7	26.2		FP-risk(pLDDT<50)
+1159	Q	0.42	5	7	26.2		FP-risk(pLDDT<50)
+1184	N	5.46	7	7	34.0		FP-risk(pLDDT<50)
+1185	G	3.825	7	7	30.7		FP-risk(pLDDT<50)
+1186	I	3.506	7	7	30.7		FP-risk(pLDDT<50)
+1187	F	1.363	6	7	27.0		FP-risk(pLDDT<50)

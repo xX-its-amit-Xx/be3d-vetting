@@ -1,0 +1,80 @@
+unipos	unires	LFC3D_pos	direction	sig_r6	persist_n_of_4	d_allo_A	d_atp_A	pLDDT	AM_mean	AM_class	struct_class	flag
+129	F	2.166	resistance(+)	p<0.001	4	4.85	9.61	95	0.976	LPath	allosteric-pocket	TP-pocket-resistance
+121	C	2.086	resistance(+)	p<0.001	4	6.26	14.23	91	0.998	LPath	distal	TP-pocket-resistance
+118	L	1.823	resistance(+)	p<0.001	4	3.67	11.99	91	0.991	LPath	allosteric-pocket	TP-pocket-resistance
+128	G	1.683	resistance(+)	p<0.001	4	5.22	7.44	95	0.994	LPath	allosteric-pocket	TP-activating(3dhotspots)
+130	Y	1.518	resistance(+)	p<0.001	4	7.42	9.7	95	0.95	LPath	distal	TP-activating(3dhotspots)
+116	Q	1.433	resistance(+)	p<0.001	4	8.36	17.59	89	0.72	LPath	distal	novel-pocket-shoulder
+114	E	1.375	resistance(+)	p<0.001	4	7.4	18.28	92	1.0	LPath	distal	novel-pocket-shoulder
+131	G	1.36	resistance(+)	p<0.001	4	8.32	11.96	94	0.997	LPath	distal	TP-activating(3dhotspots)
+120	E	1.287	resistance(+)	p<0.001	4	10.0	17.3	89	0.868	LPath	distal	novel-pocket-shoulder
+143	M	1.266	resistance(+)	p<0.001	4	3.65	3.06	96	0.992	LPath	atp-site	TP-pocket-resistance
+43	D	1.21	resistance(+)	p<0.001	4	20.13	22.93	86	0.912	LPath	distal	novel-distal(>12A)
+119	H	1.206	resistance(+)	p<0.001	4	8.23	15.21	90	0.971	LPath	distal	novel-pocket-shoulder
+122	N	1.199	resistance(+)	p<0.001	4	8.71	14.53	91	0.89	LPath	distal	novel-pocket-shoulder
+44	E	1.122	resistance(+)	p<0.001	4	21.26	23.08	85	0.567	LPath	distal	TP-activating(3dhotspots)
+45	Q	1.122	resistance(+)	p<0.001	4	19.3	20.01	85	0.39	LBen	distal	TP-activating(3dhotspots)
+115	L	0.943	resistance(+)	p<0.001	4	4.67	13.6	92	0.993	LPath	allosteric-pocket	TP-pocket-resistance
+203	E	0.941	resistance(+)	p<0.001	4	12.79	10.63	95	0.987	LPath	distal	TP-activating(3dhotspots)
+47	R	0.92	resistance(+)	p<0.001	4	18.29	20.74	88	0.755	LPath	distal	TP-activating(3dhotspots)
+285	E	0.914	resistance(+)	p<0.001	4			41	0.202	LBen	distal	likely-FP(low-pLDDT)
+286	T	0.914	resistance(+)	p<0.001	4			43	0.119	LBen	distal	likely-FP(low-pLDDT)
+144	E	0.913	resistance(+)	p<0.001	4	6.98	3.38	96	0.999	LPath	atp-site	novel-pocket-shoulder
+46	Q	0.89	resistance(+)	p<0.001	4	16.21	18.52	90	0.948	LPath	distal	TP-activating(3dhotspots)
+372	A	0.885	resistance(+)	p<0.001	4	21.5	15.59	94	0.844	LPath	distal	novel-distal(>12A)
+57	K	0.883	resistance(+)	p<0.001	4	14.26	16.45	90	0.973	LPath	distal	TP-activating(3dhotspots)
+201	R	0.872	resistance(+)	p<0.001	4	16.88	12.46	92	0.788	LPath	distal	novel-distal(>12A)
+202	G	0.863	resistance(+)	p<0.001	4	16.67	13.27	93	0.995	LPath	distal	novel-distal(>12A)
+287	P	0.862	resistance(+)	p<0.001	4			39	0.132	LBen	distal	likely-FP(low-pLDDT)
+59	K	0.849	resistance(+)	p<0.001	4	17.79	18.21	88	0.513	LPath	distal	TP-activating(3dhotspots)
+61	G	0.837	resistance(+)	p<0.001	4	16.02	18.39	89	0.922	LPath	distal	TP-activating(3dhotspots)
+58	Q	0.725	resistance(+)	p<0.001	4	16.71	18.78	88	0.553	LPath	distal	TP-activating(3dhotspots)
+284	A	0.665	resistance(+)	p<0.001	4			45	0.126	LBen	distal	likely-FP(low-pLDDT)
+60	V	0.651	resistance(+)	p<0.001	4	14.15	14.85	90	0.916	LPath	distal	TP-activating(3dhotspots)
+30	L	0.64	resistance(+)	p<0.001	4			66	0.636	LPath	distal	novel-Nterm-or-Ctail
+99	I	0.626	resistance(+)	p<0.001	4	4.74	8.08	91	0.99	LPath	allosteric-pocket	TP-pocket-resistance
+123	S	0.62	resistance(+)	p<0.01	4	9.54	13.61	93	0.953	LPath	distal	novel-pocket-shoulder
+219	M	0.606	resistance(+)	p<0.01	4	4.61	7.6	77	0.969	LPath	allosteric-pocket	TP-pocket-resistance
+220	A	0.606	resistance(+)	p<0.01	4	10.01	12.8	66	0.998	LPath	distal	novel-pocket-shoulder
+56	Q	0.578	resistance(+)	p<0.01	4	14.83	15.13	90	0.729	LPath	distal	TP-activating(3dhotspots)
+117	V	2.233	resistance(+)	p<0.001	3	7.7	16.77	89	0.964	LPath	distal	novel-pocket-shoulder
+113	R	1.157	resistance(+)	p<0.001	3	10.27	20.39	92	0.982	LPath	distal	novel-pocket-shoulder
+100	H	1.144	resistance(+)	p<0.001	3	9.32	10.29	89	0.981	LPath	distal	novel-pocket-shoulder
+112	I	1.073	resistance(+)	p<0.001	3	9.08	18.15	92	0.904	LPath	distal	novel-pocket-shoulder
+48	K	0.921	resistance(+)	p<0.001	3	18.24	17.34	89	0.562	LPath	distal	TP-activating(3dhotspots)
+371	F	0.9	resistance(+)	p<0.001	3	17.67	12.81	95	0.894	LPath	distal	novel-distal(>12A)
+142	C	0.761	resistance(+)	p<0.001	3	6.58	7.78	96	0.99	LPath	distal	TP-pocket-resistance
+199	N	0.674	resistance(+)	p<0.001	3	14.15	8.71	95	0.962	LPath	distal	novel-distal(>12A)
+49	R	0.655	resistance(+)	p<0.001	3	14.49	14.31	88	0.981	LPath	distal	TP-activating(3dhotspots)
+42	L	0.612	resistance(+)	p<0.01	3	20.2	24.33	83	0.886	LPath	distal	novel-distal(>12A)
+200	S	0.606	resistance(+)	p<0.01	3	17.32	10.42	94	0.789	LPath	distal	novel-distal(>12A)
+357	V	0.605	resistance(+)	p<0.01	3	25.79	28.46	97	0.258	LBen	distal	novel-distal(>12A)
+217	D	0.586	resistance(+)	p<0.01	3	6.59	14.62	81	0.998	LPath	distal	novel-pocket-shoulder
+218	S	0.586	resistance(+)	p<0.01	3	8.56	14.19	80	0.995	LPath	distal	novel-pocket-shoulder
+54	L	0.564	resistance(+)	p<0.01	3	14.07	16.57	90	0.917	LPath	distal	TP-activating(3dhotspots)
+216	I	0.525	resistance(+)	p<0.05	3	3.53	11.98	81	0.97	LPath	allosteric-pocket	TP-pocket-resistance
+388	T	2.345	resistance(+)	p<0.001	2			56	0.465	LPath	distal	likely-FP(low-pLDDT)
+387	P	1.497	resistance(+)	p<0.001	2			50	0.831	LPath	distal	likely-FP(low-pLDDT)
+31	E	0.681	resistance(+)	p<0.001	2			71	0.527	LPath	distal	novel-Nterm-or-Ctail
+103	I	0.66	resistance(+)	p<0.001	2	13.33	17.95	87	0.963	LPath	distal	TP-pocket-resistance
+374	W	0.654	resistance(+)	p<0.001	2	22.02	14.61	96	0.951	LPath	distal	novel-distal(>12A)
+375	L	0.654	resistance(+)	p<0.001	2	18.22	10.7	96	0.851	LPath	distal	novel-distal(>12A)
+368	E	0.638	resistance(+)	p<0.001	2	27.57	24.78	92	0.277	LBen	distal	novel-distal(>12A)
+294	G	0.619	resistance(+)	p<0.01	2			53	0.506	LPath	distal	likely-FP(low-pLDDT)
+367	E	0.617	resistance(+)	p<0.01	2	26.28	25.03	93	0.457	LBen	distal	novel-distal(>12A)
+14	A	0.567	resistance(+)	p<0.01	2			33	0.147	LBen	distal	likely-FP(low-pLDDT)
+104	K	0.556	resistance(+)	p<0.01	2	16.86	21.66	91	0.966	LPath	distal	novel-distal(>12A)
+373	G	0.556	resistance(+)	p<0.01	2	23.85	17.56	94	0.516	Amb	distal	novel-distal(>12A)
+55	T	0.527	resistance(+)	p<0.05	2	16.51	18.34	89	0.363	LBen	distal	TP-activating(3dhotspots)
+353	K	0.525	resistance(+)	p<0.05	2	20.48	24.72	97	0.706	LPath	distal	novel-distal(>12A)
+355	L	0.629	resistance(+)	p<0.001	1	19.21	21.16	98	0.95	LPath	distal	novel-distal(>12A)
+356	M	0.629	resistance(+)	p<0.001	1	20.74	24.04	97	0.517	LPath	distal	novel-distal(>12A)
+389	H	0.596	resistance(+)	p<0.01	1			45	0.164	LBen	distal	likely-FP(low-pLDDT)
+295	R	0.583	resistance(+)	p<0.01	1			52	0.645	LPath	distal	likely-FP(low-pLDDT)
+62	E	0.547	resistance(+)	p<0.05	1	16.25	18.58	91	0.866	LPath	distal	TP-activating(3dhotspots)
+369	V	0.541	resistance(+)	p<0.05	1	24.22	20.96	92	0.612	LPath	distal	novel-distal(>12A)
+370	D	0.539	resistance(+)	p<0.05	1	24.03	19.02	93	0.897	LPath	distal	novel-distal(>12A)
+192	K	0.515	resistance(+)	p<0.05	1	6.86	2.77	95	0.998	LPath	atp-site	novel-pocket-shoulder
+283	A	0.494	resistance(+)	p<0.05	1			52	0.115	LBen	distal	likely-FP(low-pLDDT)
+13	P	0.533	resistance(+)	p<0.05	0			28	0.179	LBen	distal	likely-FP(low-pLDDT)
+7	T	0.504	resistance(+)	p<0.05	0			31	0.137	LBen	distal	likely-FP(low-pLDDT)
