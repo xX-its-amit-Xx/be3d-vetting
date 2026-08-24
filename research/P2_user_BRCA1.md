@@ -76,12 +76,15 @@ signal (Findlay enrichment 1.4×, p≈0.06; Spearman ≈ 0). So BE3D here is **c
 evidence, not a standalone discriminator that beats sequence/structure predictors.**
 
 ## 5. Findlay concordance + FP/FN (the VUS-relevant evidence)
-- **TRUE POSITIVE (the win): RING Zn ligands C61, C64** — top RING hotspots from screen signal alone;
-  both **Findlay-LOF** (scores −1.84 / −2.04) and **ClinVar-pathogenic**. **C64 is an AlphaMissense
-  blind spot** (C64G 0.089, C64R 0.107 = *likely benign*), immediately adjacent to a correctly-scored
-  C61G (0.990). This is precisely where a **functional screen (BE3D / SGE) rescues a predictor miss** —
-  the single most outreach-relevant result. (Spatial-neighbor bleed also flags L63/K65, Findlay-tolerant
-  — mild aggregation FP.)
+- **TRUE POSITIVE (the win): RING Zn ligand C64** — flagged from screen signal alone, robust (4/5 runs);
+  **Findlay-LOF** (−2.04) and **ClinVar-pathogenic**, and **an AlphaMissense blind spot** (C64G 0.089,
+  C64R 0.107 = *likely benign*, vs a correctly-scored C61G 0.990). This is precisely where a **functional
+  screen (BE3D/SGE) rescues a predictor miss** — the single most outreach-relevant result. The adjacent Zn
+  ligand **C61 is borderline** (significant only 1/5 runs — it has no direct base-editable missense guide,
+  so its signal comes only from neighbors → a partial false negative); **L63/K65** are Findlay-tolerant
+  bystanders sharing the Zn-cluster value (spatial-aggregation FP). Alongside C64, a **coherent BRCT
+  Findlay-LOF core** (H1686/V1687/D1692, F1734/E1735, R1751/A1752/R1753/L1764; pLDDT 94–98) and the
+  **BARD1-interface helix 89–95** are the other genuine recoveries (§6).
 - **LIKELY FALSE POSITIVE: BRCT-linker 1801–1804 (T1802/G1803/V1804/G1801)** — BE3D's **single strongest
   cluster** (|LFC3D_neg| up to 3.7), yet **Findlay scores all of them tolerant** (0.03 / −0.22 / −0.03 /
   0.003; not LOF). Flagged explicitly: either a **base-editor-specific effect** the SGE didn't model, or
@@ -95,8 +98,46 @@ evidence, not a standalone discriminator that beats sequence/structure predictor
   not a BE3D modeling failure). Quantified in §6 / `BRCA1_false_negatives.tsv`.
 
 ## 6. Robustness across the sweep + hotspot table
-_(filled after sweep completion — see `benchmark_BRCA1/results/benchmark_by_run.tsv`,
-`BRCA1_hotspots_full.tsv`, `BRCA1_false_negatives.tsv`.)_
+Robustness computed over the **5 completed full-length AF runs** (r6/mean, r4/mean, r8/mean, r10/mean,
+r6/**sum**; all n1000, meta OLAP+CISP). The remaining sweep runs (r6/n500, r6/atom, and the RING/BRCT
+domain-local structures) were still generating and are **not** included — this partial table is
+sufficient and the trend is already saturated. A **robust hotspot** = LOF-significant (neg, p<0.05) in
+**≥60% (3/5)** runs. Files: `benchmark_BRCA1/results/benchmark_by_run.tsv`, `outreach/BRCA1/BRCA1_hotspots.tsv`
+(clean deliverable), `BRCA1_hotspots_full.tsv` (all residues), `BRCA1_false_negatives.tsv`.
+
+**Radius sensitivity (base rate + discrimination scale with radius, verdict does not):**
+
+| run | base rate p<.05 | domain gap | Findlay enr (p) | whole-prot OR (p) | pLDDT>70 baseline enr |
+|---|---|---|---|---|---|
+| r4/mean | 5.7% | +0.067 | 1.41 (0.14) | 2.9 (6e-4) | **5.1** |
+| **r6/mean (PRIMARY)** | 7.4% | +0.127 | 1.42 (0.06) | 4.3 (6e-8) | **5.1** |
+| r8/mean | 10.0% | +0.199 | 1.44 (0.02) | 4.9 (4e-11) | **5.1** |
+| r10/mean | 12.4% | +0.285 | 1.29 (0.04) | 4.8 (4e-12) | **5.1** |
+
+Bigger radius flags more (base rate 6→12%) and widens the *domain* gap, but the **Findlay residue-level
+enrichment stays pinned at ~1.3–1.4× and the trivial pLDDT>70 baseline (enr 5.1) beats BE3D at every
+radius.** The honest verdict is radius-invariant.
+
+**Robust hotspot table (130 residues, 5-run consensus): 22 TP / 4 NOVEL / 104 LIKELY-FP.** That most
+robust hotspots are likely-FP is itself the discrimination result — the strong-signal set is dominated
+by the low-pLDDT IDR and the BRCT-linker, not validated sites.
+- **TP core (the real recovery):** a coherent **BRCT Findlay-LOF cluster** — H1686/V1687/D1692/T1685,
+  F1734/E1735, G1748/P1749/R1751/A1752/R1753/L1764 (all Findlay-LOF, pLDDT 94–98, 3–5/5 runs) — plus the
+  **RING Zn ligand C64** (Findlay-LOF, ClinVar-pathogenic, **AlphaMissense-benign blind spot**; robust 4/5)
+  and the **BARD1-interface helix 89–95** (literature functional, 3/5). This is a genuine, VUS-relevant
+  functional recovery.
+- **Precision caveat:** the C61 Zn ligand is significant in only 1/5 runs (no direct base-editable
+  missense guide — signal via neighbors only) → a partial false negative; L63/K65 are Findlay-tolerant
+  bystanders sharing the aggregated Zn-cluster value (spatial-aggregation FP).
+- **LIKELY-FP (flagged explicitly):** BRCT-linker **1802/1803/1804/1805/1816/1818** (robust 4–5/5 yet
+  **Findlay-tolerant** — note: guide-level ClinVar tags 1803/1804 P/LP, but per-residue Findlay says
+  tolerant; recorded in the `note` column as a conflict) and the low-pLDDT IDR clusters **214–222,
+  1250–1252, 1282–1284, 1335–1338, 1478–1479, 1502–1504** (no structural or functional support).
+- **FALSE NEGATIVES:** of **68 Findlay-LOF residues, only 9 have a base-editable missense guide** in this
+  CBE screen; **51/54** unflagged LOF residues are missed purely because the CBE **cannot install the
+  required codon change** (e.g. RING Zn ligands C24/C27/C39/C44/C47 and BRCT S1655 have no missense
+  guide) — a base-editing coverage limit, not a BE3D modeling error. BE3D robustly flags **14/68**
+  Findlay-LOF residues overall (and 6/9 of those that are screen-covered).
 
 ## 7. Competitor comparison (B)
 | Tool | Input signal | On BRCA1 | Advantage | Disadvantage |
@@ -113,8 +154,9 @@ functional-domain vs IDR *and* give finer residue resolution with no experiment;
 per-residue functional truth. → **BE3D is complementary evidence, best fused with these, not a replacement.**
 
 ## 8. Deliverables (outreach/BRCA1/)
-`BRCA1_hotspots.tsv` (robust hotspots + TP/novel/FP flags), G2P TSV (`BRCA1_g2p.tsv`), `BRCA1_email.md`,
-`BRCA1_brief.md`. Analysis artifacts in `benchmark_BRCA1/` and `real_output/P2_BRCA1/`.
+`BRCA1_hotspots.tsv` (130 robust hotspots + TP/novel/FP flags + Findlay/ClinVar/pLDDT annotation),
+`BRCA1_G2P.tsv` (primary-run interactive-view input, 1863 residues), `BRCA1_email.md`, `BRCA1_brief.md`.
+Analysis artifacts in `scratchpad/benchmark_BRCA1/` and `real_output/P2_BRCA1/`.
 
 ## 9. BE3D issues encountered (→ BE3D_IMPROVEMENTS.md)
 - [SCALE] Full-length AF (1863 res) + meta n1000 ≈ 6 min/run (vs ~40 s for a 400-res domain); the

@@ -1,0 +1,131 @@
+residue	AA	domain	LFC3D_mean_abs	direction	sig_frac_of_runs	pLDDT	screen_missense	findlay_SGE	findlay_func_score	clinvar_guide	lit_functional	flag	note
+1803	G	BRCT	3.119	neg (dropout / LOF)	1.0	75.4	1	func	-0.219	P/LP	0	LIKELY-FP	ClinVar-P/LP_guide_but_Findlay-tolerant
+1802	T	BRCT	2.984	neg (dropout / LOF)	1.0	66.2	0	func	0.032	NA	0	LIKELY-FP	
+1804	V	BRCT	2.864	neg (dropout / LOF)	1.0	85.9	1	func	-0.025	P/LP	0	LIKELY-FP	ClinVar-P/LP_guide_but_Findlay-tolerant
+220	S	central-IDR	2.723	neg (dropout / LOF)	1.0	33.2	1	NA		NA	0	LIKELY-FP	
+221	A	central-IDR	2.456	neg (dropout / LOF)	1.0	35.8	1	NA		NA	0	LIKELY-FP	
+219	D	central-IDR	2.14	neg (dropout / LOF)	1.0	34.4	1	NA		NA	0	LIKELY-FP	
+214	D	central-IDR	1.906	neg (dropout / LOF)	1.0	32.5	1	NA		NA	0	LIKELY-FP	
+222	K	central-IDR	1.862	neg (dropout / LOF)	1.0	37.2	0	NA		NA	0	LIKELY-FP	
+1282	E	central-IDR	1.81	neg (dropout / LOF)	1.0	31.6	0	NA		NA	0	LIKELY-FP	
+1283	H	central-IDR	1.81	neg (dropout / LOF)	1.0	30.6	1	NA		NA	0	LIKELY-FP	
+1284	H	central-IDR	1.81	neg (dropout / LOF)	1.0	33.9	0	NA		NA	0	LIKELY-FP	
+218	L	central-IDR	1.687	neg (dropout / LOF)	1.0	35.3	0	NA		NA	0	LIKELY-FP	
+1805	H	BRCT	1.548	neg (dropout / LOF)	1.0	89.1	0	func	0.042	NA	0	LIKELY-FP	
+213	R	central-IDR	1.526	neg (dropout / LOF)	1.0	34.1	1	NA		NA	0	LIKELY-FP	
+63	L	RING	1.475	neg (dropout / LOF)	1.0	86.2	0	func	-0.051	NA	0	LIKELY-FP	
+215	E	central-IDR	1.377	neg (dropout / LOF)	1.0	33.3	1	NA		NA	0	LIKELY-FP	
+216	I	central-IDR	1.357	neg (dropout / LOF)	1.0	35.0	0	NA		NA	0	LIKELY-FP	
+1250	E	central-IDR	1.354	neg (dropout / LOF)	1.0	24.3	0	NA		NA	0	LIKELY-FP	
+1251	C	central-IDR	1.354	neg (dropout / LOF)	1.0	25.2	1	NA		NA	0	LIKELY-FP	
+1252	L	central-IDR	1.354	neg (dropout / LOF)	1.0	23.8	0	NA		NA	0	LIKELY-FP	
+212	T	central-IDR	1.319	neg (dropout / LOF)	1.0	33.5	1	NA		NA	0	LIKELY-FP	
+159	L	central-IDR	1.311	neg (dropout / LOF)	1.0	33.8	0	NA		NA	0	LIKELY-FP	
+160	G	central-IDR	1.285	neg (dropout / LOF)	1.0	28.7	1	NA		NA	0	LIKELY-FP	
+161	T	central-IDR	1.285	neg (dropout / LOF)	1.0	30.8	1	NA		NA	0	LIKELY-FP	
+217	S	central-IDR	1.267	neg (dropout / LOF)	1.0	34.7	1	NA		NA	0	LIKELY-FP	
+1752	A	BRCT	1.208	neg (dropout / LOF)	1.0	95.8	1	LOF	-1.792	NA	0	TP	
+1753	R	BRCT	1.201	neg (dropout / LOF)	1.0	94.6	1	LOF	-2.384	NA	0	TP	
+1750	K	BRCT	1.188	neg (dropout / LOF)	1.0	95.8	0	func	-0.18	NA	0	LIKELY-FP	
+1751	R	BRCT	1.183	neg (dropout / LOF)	1.0	95.2	1	LOF	-1.214	NA	0	TP	
+1754	E	BRCT	1.181	neg (dropout / LOF)	1.0	93.1	1	func	-0.036	NA	0	LIKELY-FP	
+1818	D	BRCT	1.168	neg (dropout / LOF)	1.0	64.4	1	func	-0.669	NA	0	LIKELY-FP	
+1687	V	BRCT	1.149	neg (dropout / LOF)	1.0	97.6	0	LOF	-1.174	NA	0	TP	
+1502	P	central-IDR	1.137	neg (dropout / LOF)	1.0	35.3	1	NA		NA	0	LIKELY-FP	
+1503	S	central-IDR	1.137	neg (dropout / LOF)	1.0	31.4	1	NA		NA	0	LIKELY-FP	
+1816	T	BRCT	1.12	neg (dropout / LOF)	1.0	74.4	0	func	-0.23	NA	0	LIKELY-FP	
+1504	L	central-IDR	1.079	neg (dropout / LOF)	1.0	27.3	0	NA		NA	0	LIKELY-FP	
+1336	S	central-IDR	1.014	neg (dropout / LOF)	1.0	30.8	1	NA		NA	0	LIKELY-FP	
+1337	D	central-IDR	1.014	neg (dropout / LOF)	1.0	36.1	1	NA		NA	0	LIKELY-FP	
+1686	H	BRCT	1.0	neg (dropout / LOF)	1.0	97.3	1	LOF	-1.743	NA	0	TP	
+438	E	central-IDR	0.945	neg (dropout / LOF)	1.0	30.8	0	NA		NA	0	LIKELY-FP	
+208	T	central-IDR	0.938	neg (dropout / LOF)	1.0	29.1	1	NA		NA	0	LIKELY-FP	
+209	P	central-IDR	0.938	neg (dropout / LOF)	1.0	39.3	1	NA		NA	0	LIKELY-FP	
+439	A	central-IDR	0.886	neg (dropout / LOF)	1.0	25.0	1	NA		NA	0	LIKELY-FP	
+1478	E	central-IDR	0.867	neg (dropout / LOF)	1.0	30.3	1	NA		NA	0	LIKELY-FP	
+1479	V	central-IDR	0.867	neg (dropout / LOF)	1.0	29.1	0	NA		NA	0	LIKELY-FP	
+1335	L	central-IDR	0.845	neg (dropout / LOF)	1.0	32.0	0	NA		NA	0	LIKELY-FP	
+1338	K	central-IDR	0.845	neg (dropout / LOF)	1.0	35.4	0	NA		NA	0	LIKELY-FP	
+1692	D	BRCT	0.844	neg (dropout / LOF)	1.0	94.1	0	LOF	-1.652	NA	0	TP	
+1693	A	BRCT	0.844	neg (dropout / LOF)	1.0	91.9	1	func	-1.058	NA	0	LIKELY-FP	
+1694	E	BRCT	0.844	neg (dropout / LOF)	1.0	91.5	0	func	-0.339	NA	0	LIKELY-FP	
+440	L	central-IDR	0.838	neg (dropout / LOF)	1.0	26.8	0	NA		NA	0	LIKELY-FP	
+1685	T	BRCT	0.813	neg (dropout / LOF)	1.0	95.1	0	LOF	-1.48	NA	0	TP	
+376	N	central-IDR	0.8	neg (dropout / LOF)	1.0	40.6	0	NA		NA	0	LIKELY-FP	
+377	S	central-IDR	0.8	neg (dropout / LOF)	1.0	50.3	1	NA		NA	0	NOVEL	
+378	S	central-IDR	0.8	neg (dropout / LOF)	1.0	48.7	0	NA		NA	0	LIKELY-FP	
+1045	N	central-IDR	0.761	neg (dropout / LOF)	1.0	27.3	0	NA		NA	0	LIKELY-FP	
+1046	E	central-IDR	0.761	neg (dropout / LOF)	1.0	27.1	1	NA		NA	0	LIKELY-FP	
+836	E	central-IDR	0.686	neg (dropout / LOF)	1.0	28.5	0	NA		NA	0	LIKELY-FP	
+1801	G	BRCT	1.885	neg (dropout / LOF)	0.8	64.5	0	func	0.003	NA	0	LIKELY-FP	
+1817	E	BRCT	1.46	neg (dropout / LOF)	0.8	62.2	1	func	-0.095	NA	0	LIKELY-FP	
+1763	G	BRCT	1.459	neg (dropout / LOF)	0.8	89.0	0	func	-0.62	NA	0	LIKELY-FP	
+64	C	RING	1.275	neg (dropout / LOF)	0.8	88.6	1	LOF	-2.043	P/LP	1	TP	
+1764	L	BRCT	1.216	neg (dropout / LOF)	0.8	93.3	0	LOF	-1.157	NA	0	TP	
+1755	S	BRCT	1.133	neg (dropout / LOF)	0.8	89.9	0	func	-0.195	NA	0	LIKELY-FP	
+1711	K	BRCT	1.001	neg (dropout / LOF)	0.8	95.6	0	func	-0.244	NA	0	LIKELY-FP	
+1713	V	BRCT	0.987	neg (dropout / LOF)	0.8	97.4	0	LOF	-1.218	NA	0	TP	
+1710	G	BRCT	0.975	neg (dropout / LOF)	0.8	95.0	0	func	-0.102	NA	0	LIKELY-FP	
+1712	W	BRCT	0.974	neg (dropout / LOF)	0.8	96.9	0	func	-0.468	NA	0	LIKELY-FP	
+1501	C	central-IDR	0.816	neg (dropout / LOF)	0.8	26.7	0	NA		NA	0	LIKELY-FP	
+437	H	central-IDR	0.756	neg (dropout / LOF)	0.8	29.1	0	NA		NA	0	LIKELY-FP	
+1749	P	BRCT	0.755	neg (dropout / LOF)	0.8	96.4	0	LOF	-1.722	NA	0	TP	
+162	V	central-IDR	0.72	neg (dropout / LOF)	0.8	33.6	0	NA		NA	0	LIKELY-FP	
+838	N	central-IDR	0.697	neg (dropout / LOF)	0.8	26.2	0	NA		NA	0	LIKELY-FP	
+1731	E	BRCT	0.687	neg (dropout / LOF)	0.8	96.1	0	func	-0.485	NA	0	LIKELY-FP	
+1707	I	BRCT	0.683	neg (dropout / LOF)	0.8	97.0	0	func	-0.801	NA	0	LIKELY-FP	
+1695	F	BRCT	0.675	neg (dropout / LOF)	0.8	94.6	0	func	-0.275	NA	0	LIKELY-FP	
+91	C	RING-flank	0.662	neg (dropout / LOF)	0.8	88.9	0	func	-0.424	NA	1	TP	
+92	A	RING-flank	0.662	neg (dropout / LOF)	0.8	88.8	1	LOF	-1.852	NA	1	TP	
+93	F	RING-flank	0.662	neg (dropout / LOF)	0.8	89.9	0	func	-1.017	NA	1	TP	
+542	N	central-IDR	0.649	neg (dropout / LOF)	0.8	30.2	0	NA		NA	0	LIKELY-FP	
+543	G	central-IDR	0.649	neg (dropout / LOF)	0.8	28.8	1	NA		NA	0	LIKELY-FP	
+544	Q	central-IDR	0.649	neg (dropout / LOF)	0.8	30.3	0	NA		NA	0	LIKELY-FP	
+837	V	central-IDR	0.647	neg (dropout / LOF)	0.8	30.4	1	NA		NA	0	LIKELY-FP	
+375	L	central-IDR	0.64	neg (dropout / LOF)	0.8	39.4	0	NA		NA	0	LIKELY-FP	
+379	I	central-IDR	0.64	neg (dropout / LOF)	0.8	57.6	0	NA		NA	0	NOVEL	
+380	Q	central-IDR	0.64	neg (dropout / LOF)	0.8	58.5	0	NA		NA	0	NOVEL	
+381	K	central-IDR	0.64	neg (dropout / LOF)	0.8	66.9	0	NA		NA	0	NOVEL	
+1732	H	BRCT	0.62	neg (dropout / LOF)	0.8	94.3	1	func	-0.126	NA	0	LIKELY-FP	
+1733	D	BRCT	0.62	neg (dropout / LOF)	0.8	94.2	0	func	-0.155	NA	0	LIKELY-FP	
+935	K	central-IDR	0.617	neg (dropout / LOF)	0.8	26.8	0	NA		NA	0	LIKELY-FP	
+936	D	central-IDR	0.617	neg (dropout / LOF)	0.8	27.6	1	NA		NA	0	LIKELY-FP	
+937	K	central-IDR	0.617	neg (dropout / LOF)	0.8	33.1	0	NA		NA	0	LIKELY-FP	
+1212	S	central-IDR	0.609	neg (dropout / LOF)	0.8	30.6	0	NA		NA	0	LIKELY-FP	
+1213	E	central-IDR	0.609	neg (dropout / LOF)	0.8	31.0	1	NA		NA	0	LIKELY-FP	
+1214	E	central-IDR	0.609	neg (dropout / LOF)	0.8	31.8	0	NA		NA	0	LIKELY-FP	
+285	H	central-IDR	0.598	neg (dropout / LOF)	0.8	25.6	0	NA		NA	0	LIKELY-FP	
+286	E	central-IDR	0.598	neg (dropout / LOF)	0.8	26.3	1	NA		NA	0	LIKELY-FP	
+287	N	central-IDR	0.598	neg (dropout / LOF)	0.8	29.2	0	NA		NA	0	LIKELY-FP	
+374	T	central-IDR	0.59	neg (dropout / LOF)	0.8	43.4	0	NA		NA	0	LIKELY-FP	
+921	Q	central-IDR	0.59	neg (dropout / LOF)	0.8	25.3	0	NA		NA	0	LIKELY-FP	
+922	T	central-IDR	0.59	neg (dropout / LOF)	0.8	23.3	1	NA		NA	0	LIKELY-FP	
+923	V	central-IDR	0.59	neg (dropout / LOF)	0.8	29.3	0	NA		NA	0	LIKELY-FP	
+1069	Q	central-IDR	0.59	neg (dropout / LOF)	0.8	27.2	0	NA		NA	0	LIKELY-FP	
+1070	A	central-IDR	0.59	neg (dropout / LOF)	0.8	28.2	1	NA		NA	0	LIKELY-FP	
+1071	E	central-IDR	0.59	neg (dropout / LOF)	0.8	28.9	0	NA		NA	0	LIKELY-FP	
+1652	M	BRCT	0.581	neg (dropout / LOF)	0.8	96.0	0	func	-0.352	NA	0	LIKELY-FP	
+262	Q	central-IDR	0.57	neg (dropout / LOF)	0.8	27.9	0	NA		NA	0	LIKELY-FP	
+1657	L	BRCT	0.553	neg (dropout / LOF)	0.8	95.5	0	func	-0.9	NA	0	LIKELY-FP	
+1684	T	BRCT	0.553	neg (dropout / LOF)	0.8	94.7	0	func	-1.086	NA	0	LIKELY-FP	
+373	I	central-IDR	0.54	neg (dropout / LOF)	0.8	40.4	0	NA		NA	0	LIKELY-FP	
+65	K	RING	1.076	neg (dropout / LOF)	0.6	84.9	0	func	-0.019	NA	0	LIKELY-FP	
+210	Q	central-IDR	0.881	neg (dropout / LOF)	0.6	34.8	0	NA		NA	0	LIKELY-FP	
+1774	N	BRCT	0.851	neg (dropout / LOF)	0.6	87.9	0	func	-0.017	NA	1	TP	
+1773	T	BRCT	0.832	neg (dropout / LOF)	0.6	89.8	1	func	-0.292	NA	0	LIKELY-FP	
+1477	F	central-IDR	0.65	neg (dropout / LOF)	0.6	29.6	0	NA		NA	0	LIKELY-FP	
+1589	R	central-IDR	0.649	neg (dropout / LOF)	0.6	28.6	1	NA		NA	0	LIKELY-FP	
+1819	N	BRCT	0.638	neg (dropout / LOF)	0.6	74.4	0	func	-0.166	NA	0	LIKELY-FP	
+393	L	central-IDR	0.624	neg (dropout / LOF)	0.6	29.9	0	NA		NA	0	LIKELY-FP	
+1588	A	central-IDR	0.624	neg (dropout / LOF)	0.6	30.2	0	NA		NA	0	LIKELY-FP	
+1047	V	central-IDR	0.597	neg (dropout / LOF)	0.6	27.4	0	NA		NA	0	LIKELY-FP	
+263	G	central-IDR	0.565	neg (dropout / LOF)	0.6	29.4	1	NA		NA	0	LIKELY-FP	
+1748	G	BRCT	0.55	neg (dropout / LOF)	0.6	95.4	0	LOF	-1.636	NA	0	TP	
+89	I	RING-flank	0.53	neg (dropout / LOF)	0.6	91.2	0	func	-0.623	NA	1	TP	
+90	I	RING-flank	0.53	neg (dropout / LOF)	0.6	90.3	0	func	-0.366	NA	1	TP	
+94	Q	RING-flank	0.53	neg (dropout / LOF)	0.6	89.6	0	func	-0.581	NA	1	TP	
+95	L	RING-flank	0.53	neg (dropout / LOF)	0.6	87.1	1	func	-0.918	P/LP	1	TP	ClinVar-P/LP_guide_but_Findlay-tolerant
+1730	N	BRCT	0.496	neg (dropout / LOF)	0.6	95.0	0	func	0.117	NA	0	LIKELY-FP	
+1734	F	BRCT	0.496	neg (dropout / LOF)	0.6	96.5	0	LOF	-2.072	NA	0	TP	
+1735	E	BRCT	0.496	neg (dropout / LOF)	0.6	97.2	0	LOF	-1.191	NA	0	TP	
+1690	K	BRCT	0.442	neg (dropout / LOF)	0.6	97.4	0	func	-0.477	NA	0	LIKELY-FP	

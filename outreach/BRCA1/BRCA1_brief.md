@@ -20,7 +20,7 @@
 **Verdict:** BE3D discriminates at the **domain** level (functional domains ≫ disordered middle) but that is largely recapitulated by a folded-vs-disordered / AlphaMissense baseline; it adds only **modest residue-level** signal. It is complementary evidence, not a standalone classifier.
 
 ## Hotspot calls
-- **TP (validated):** **RING Zn ligands C61, C64** — Findlay-LOF and ClinVar-pathogenic; **C64 is an AlphaMissense blind spot** (called likely-benign) → the clearest place a functional screen adds value.
+- **TP (validated):** **RING Zn ligand C64** (robust 4/5 runs) — Findlay-LOF and ClinVar-pathogenic; **an AlphaMissense blind spot** (called likely-benign) → the clearest place a functional screen adds value. Plus a coherent **BRCT Findlay-LOF core** (H1686/V1687/D1692, R1751/A1752/R1753, F1734) and the BARD1-interface helix (89–95). Adjacent Zn ligand C61 is borderline (no direct base-editable guide → partial false negative).
 - **Likely false positive:** **BRCT-linker 1801–1804** (T1802/G1803/V1804) — BE3D's single strongest cluster, but **Findlay scores these tolerant**. Either a base-editor-specific effect or spurious; do not report as functional without orthogonal support.
 - **Novel candidate (hypothesis):** central cluster **214–222** — reproducible multi-guide dropout, but in low-pLDDT disordered structure; unvalidated.
 - **False negatives:** LOF residues with no base-editable missense guide in the screen (CBE cannot install the required codon change) are systematically missed — a base-editing coverage limit, not a BE3D failure.
