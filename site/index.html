@@ -194,6 +194,7 @@
     <a href="#realworld">Real problems</a>
     <a href="#validate">Validation</a>
     <a href="#improve">BE3D fixes</a>
+    <a href="#contribute">Pull requests</a>
     <a href="#adopt">Adoption</a>
   </nav>
   <button class="toggle" id="themeBtn">◐ theme</button>
@@ -669,6 +670,51 @@
     </ul></div>
   </div>
   <p class="note" style="margin-top:12px">These sit alongside the method-level roadmap in the <a href="#critique">Critique</a> section (distance-decay kernel, FDR/q-values, cluster-level significance, inverse-variance meta). Together they form a concrete, prioritized to-do list grounded in real use — not speculation.</p>
+</div></section>
+
+<!-- CONTRIBUTED BACK -->
+<section id="contribute"><div class="wrap">
+  <div class="eyebrow">Contributed back · tested pull requests</div>
+  <h2>From critique to code — 4 PRs to BE3D, each with tests</h2>
+  <p style="max-width:880px">The critique above isn't just commentary: every gap we hit by <i>using</i> BE3D was turned into a minimal, backward-compatible, <b>tested</b> pull request opened on the upstream Broad repo. All four add a <code>tests/</code> suite (BE3D previously had none) and are transparently attributed.</p>
+  <div class="grid2" id="prCards" style="align-items:start"></div>
+
+  <h3 style="margin-top:30px">Next: a cross-domain roadmap</h3>
+  <p style="max-width:880px">A fan-out across ~25 fields for inspiration found a striking <b>convergence</b> — unrelated domains prescribe the same next fixes. Two of them are the principled successors to the PRs we just shipped.</p>
+  <div class="grid3" id="roadmapCards"></div>
+  <p class="note" style="margin-top:12px">Full survey + citations: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/blob/main/research/P5_cross_domain_inspiration.md">research/P5_cross_domain_inspiration.md</a>.</p>
+
+  <script>
+  (function(){
+    const U='https://github.com/broadinstitute/BE3D/pull/';
+    const prs=[
+      {n:18,title:'Run in a clean environment',what:'Pure-Python DSSP fallback (a missing mkdssp no longer aborts a run), pandas-3.x + Windows-safe filenames, and a CI workflow.',why:'BE3D wouldn\'t complete on Windows / modern pandas / without mkdssp — the "it doesn\'t even run" tier.',t:'4 tests + CI'},
+      {n:17,title:'invert_score for enrichment/activity screens',what:'Opt-in flag so activity-reporter and resistance-enrichment screens aren\'t silently sign-inverted.',why:'BE3D bakes in a dropout sign; on the DNMT3A activity screen the biology flipped while QA still "passed".',t:'3 tests'},
+      {n:20,title:'Benjamini-Hochberg FDR q-values',what:'Companion q-value columns alongside the raw p-values, with a q<0.1 recommendation.',why:'Base rates hit 7–50% across targets — the raw p<0.05 flag over-calls; FDR makes the call multiplicity-aware.',t:'9 tests'},
+      {n:19,title:'Base-editing reachability report',what:'A utility that reports which residues a CBE/ABE screen could even edit (and which known hotspots it couldn\'t).',why:'Many validated residues (R882, V600, H1047R, E17K, T790M) are un-editable — so BE3D\'s "misses" are the assay\'s, not the tool\'s.',t:'2 tests'},
+    ];
+    document.getElementById('prCards').innerHTML=prs.map(p=>`<div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <b style="color:var(--ink)">${p.title}</b>
+        <a class="pill" href="${U}${p.n}" style="text-decoration:none;white-space:nowrap"><b>PR #${p.n}</b> open</a>
+      </div>
+      <p style="font-size:.83rem;margin:8px 0 6px"><b>What:</b> ${p.what}</p>
+      <p style="font-size:.82rem;margin:0;color:var(--ink2)"><b>Why:</b> ${p.why}</p>
+      <div class="tag2" style="margin-top:8px;color:var(--good);border-color:color-mix(in srgb,var(--good) 40%,var(--border))">✓ ${p.t}</div>
+    </div>`).join('');
+
+    const rm=[
+      {t:'Empirical-Bayes shrinkage',d:'safety · actuarial · disease-mapping · DMS · phylogenetics',g:'One fix for over-calling + naive SUM meta + uncertainty. ≥6 fields converge (Hauer, Bühlmann, Marshall, Enrich2, FUBAR).'},
+      {t:'Spatial-FDR on a Gi*/Milo statistic',d:'GIS · single-cell · ecology',g:'Cluster-level significance under spatially-aware FDR — the successor to PR #20.'},
+      {t:'Occupancy models (imperfect detection)',d:'ecology (MacKenzie 2002)',g:'A residue can be functional yet undetected because it\'s un-editable — the principled successor to PR #19.'},
+    ];
+    document.getElementById('roadmapCards').innerHTML=rm.map(r=>`<div class="card">
+      <div class="sector" style="color:var(--s1)">${r.d}</div>
+      <h4 style="margin:4px 0 8px">${r.t}</h4>
+      <p style="font-size:.82rem;margin:0">${r.g}</p>
+    </div>`).join('');
+  })();
+  </script>
 </div></section>
 
 <!-- ADOPTION -->
