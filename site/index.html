@@ -675,12 +675,12 @@
 <!-- CONTRIBUTED BACK -->
 <section id="contribute"><div class="wrap">
   <div class="eyebrow">Contributed back · tested pull requests</div>
-  <h2>From critique to code — 4 PRs to BE3D, each with tests</h2>
-  <p style="max-width:880px">The critique above isn't just commentary: every gap we hit by <i>using</i> BE3D was turned into a minimal, backward-compatible, <b>tested</b> pull request opened on the upstream Broad repo. All four add a <code>tests/</code> suite (BE3D previously had none) and are transparently attributed.</p>
+  <h2>From critique to code — 6 PRs to BE3D, each with tests</h2>
+  <p style="max-width:880px">The critique above isn't just commentary: every gap we hit by <i>using</i> BE3D was turned into a minimal, backward-compatible, <b>tested</b> pull request opened on the upstream Broad repo — four fixing what we hit in real use, two implementing the top cross-domain roadmap ideas. All add tests (BE3D previously had none) and are transparently attributed. Guiding ethos: <b>each change is judged by whether it helps get treatments to patients faster</b> — trustworthy, ranked hotspots mean a lab validates the right residues, not a hundred.</p>
   <div class="grid2" id="prCards" style="align-items:start"></div>
 
-  <h3 style="margin-top:30px">Next: a cross-domain roadmap</h3>
-  <p style="max-width:880px">A fan-out across ~25 fields for inspiration found a striking <b>convergence</b> — unrelated domains prescribe the same next fixes. Two of them are the principled successors to the PRs we just shipped.</p>
+  <h3 style="margin-top:30px">Next: a patient-first roadmap</h3>
+  <p style="max-width:880px">A fan-out across ~25 fields found a striking <b>convergence</b>. Two ideas already shipped as PRs — empirical-Bayes meta-aggregation (<a href="https://github.com/broadinstitute/BE3D/pull/21">#21</a>) and Getis-Ord Gi* (<a href="https://github.com/broadinstitute/BE3D/pull/22">#22</a>). The remaining queue is ordered by <b>patient impact</b> — the shortest path from a screen to a confident, actionable decision.</p>
   <div class="grid3" id="roadmapCards"></div>
   <p class="note" style="margin-top:12px">Full survey + citations: <a href="https://github.com/xX-its-amit-Xx/be3d-vetting/blob/main/research/P5_cross_domain_inspiration.md">research/P5_cross_domain_inspiration.md</a>.</p>
 
@@ -691,7 +691,9 @@
       {n:18,title:'Run in a clean environment',what:'Pure-Python DSSP fallback (a missing mkdssp no longer aborts a run), pandas-3.x + Windows-safe filenames, and a CI workflow.',why:'BE3D wouldn\'t complete on Windows / modern pandas / without mkdssp — the "it doesn\'t even run" tier.',t:'4 tests + CI'},
       {n:17,title:'invert_score for enrichment/activity screens',what:'Opt-in flag so activity-reporter and resistance-enrichment screens aren\'t silently sign-inverted.',why:'BE3D bakes in a dropout sign; on the DNMT3A activity screen the biology flipped while QA still "passed".',t:'3 tests'},
       {n:20,title:'Benjamini-Hochberg FDR q-values',what:'Companion q-value columns alongside the raw p-values, with a q<0.1 recommendation.',why:'Base rates hit 7–50% across targets — the raw p<0.05 flag over-calls; FDR makes the call multiplicity-aware.',t:'9 tests'},
-      {n:19,title:'Base-editing reachability report',what:'A utility that reports which residues a CBE/ABE screen could even edit (and which known hotspots it couldn\'t).',why:'Many validated residues (R882, V600, H1047R, E17K, T790M) are un-editable — so BE3D\'s "misses" are the assay\'s, not the tool\'s.',t:'2 tests'},
+      {n:19,title:'Base-editing reachability report',what:'A utility that reports which residues a CBE/ABE screen could even edit (and which known hotspots it couldn\'t).',why:'Many validated residues (R882, V600, H1047R, E17K, T790M) are un-editable — teams shouldn\'t chase them; pick the right modality and move faster.',t:'2 tests'},
+      {n:21,title:'Inverse-variance / empirical-Bayes meta-aggregation',what:'Opt-in inverse-variance weighting when combining multiple screens, instead of a naive sum.',why:'Down-weights noisy screens so consensus hotspots are trustworthy — fewer false leads for a therapeutics team to validate.',t:'9 tests'},
+      {n:22,title:'Getis-Ord Gi* local hotspot statistic',what:'A standardized local hotspot z-score (optional distance-decay weights) computed on BE3D\'s existing neighbor table.',why:'A calibrated, cross-protein-comparable score sharpens which residues to prioritize for the next validation experiment.',t:'11 tests'},
     ];
     document.getElementById('prCards').innerHTML=prs.map(p=>`<div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
@@ -704,9 +706,9 @@
     </div>`).join('');
 
     const rm=[
-      {t:'Empirical-Bayes shrinkage',d:'safety · actuarial · disease-mapping · DMS · phylogenetics',g:'One fix for over-calling + naive SUM meta + uncertainty. ≥6 fields converge (Hauer, Bühlmann, Marshall, Enrich2, FUBAR).'},
-      {t:'Spatial-FDR on a Gi*/Milo statistic',d:'GIS · single-cell · ecology',g:'Cluster-level significance under spatially-aware FDR — the successor to PR #20.'},
-      {t:'Occupancy models (imperfect detection)',d:'ecology (MacKenzie 2002)',g:'A residue can be functional yet undetected because it\'s un-editable — the principled successor to PR #19.'},
+      {t:'A "what-to-validate-next" shortlist',d:'patient impact · #1',g:'One ranked, wet-lab-ready table fusing FDR q-value + pLDDT confidence + base-editing reachability — so a lab validates the right 10 residues, not 100. The most direct time-to-patient lever.'},
+      {t:'Clinical-actionability overlay',d:'ClinVar · COSMIC · cBioPortal · druggability',g:'Auto-triage each hotspot as known-actionable / known-resistance / novel, so a translational team sees the decision-relevant hits immediately.'},
+      {t:'Occupancy models (imperfect detection)',d:'ecology (MacKenzie 2002)',g:'A residue can be functional yet undetected because it\'s un-editable — the principled successor to the reachability report (#19).'},
     ];
     document.getElementById('roadmapCards').innerHTML=rm.map(r=>`<div class="card">
       <div class="sector" style="color:var(--s1)">${r.d}</div>
