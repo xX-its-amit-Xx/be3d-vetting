@@ -696,8 +696,8 @@
 <!-- CONTRIBUTED BACK -->
 <section id="contribute"><div class="wrap">
   <div class="eyebrow">Contributed back · tested pull requests</div>
-  <h2>From critique to code — 9 PRs to BE3D, each with tests</h2>
-  <p style="max-width:880px">The critique above isn't just commentary: every gap we hit by <i>using</i> BE3D was turned into a minimal, backward-compatible, <b>tested</b> pull request opened on the upstream Broad repo — four fixing what we hit in real use, three advancing the patient-impact roadmap, and two <b>readying BE3D for emerging editors</b> (from a cited field review: C→G/transversion editors, AYBE, dual editors, prime editing). All add tests (BE3D previously had none) and are transparently attributed. Guiding ethos: <b>each change is judged by whether it helps get treatments to patients faster</b> — a trustworthy, ranked shortlist means a lab validates the right residues, not a hundred.</p>
+  <h2>From critique to code — 10 PRs to BE3D, each with tests</h2>
+  <p style="max-width:880px">The critique above isn't just commentary: every gap we hit by <i>using</i> BE3D was turned into a minimal, backward-compatible, <b>tested</b> pull request opened on the upstream Broad repo — four fixing what we hit in real use, three advancing the patient-impact roadmap, two <b>readying BE3D for emerging editors</b> (from a cited field review: C→G/transversion editors, AYBE, dual editors, prime editing), and one <b>correctness fix a stress-test uncovered</b> (the self-leak bug). All add tests (BE3D previously had none) and are transparently attributed. Guiding ethos: <b>each change is judged by whether it helps get treatments to patients faster</b> — a trustworthy, ranked shortlist means a lab validates the right residues, not a hundred.</p>
   <div class="grid2" id="prCards" style="align-items:start"></div>
 
   <h3 style="margin-top:30px">Next: a patient-first roadmap</h3>
@@ -718,6 +718,7 @@
       {n:23,title:'"What-to-validate-next" shortlist',what:'A ranked, wet-lab-ready table (A/B/C tiers) fusing FDR q-value + AlphaFold pLDDT + base-editing reachability.',why:'Turns an over-called hotspot list into "validate these 10, not 100" — the most direct time-to-patient lever.',t:'7 tests'},
       {n:25,title:'Editor-profile abstraction (emerging-editor readiness)',what:'A per-editor registry (CBE/ABE/CGBE/AYBE/dual/prime) with amino_acid_reachable(ref,alt,editor) — generalizing reachability to any editor.',why:'As transversion & prime editors arrive, BE3D becomes a modality-selection aid — which editor can install the fix a residue needs — so the right therapy is designed faster.',t:'14 tests'},
       {n:26,title:'Configurable mutation vocabulary (prime/emerging readiness)',what:'Control category is configurable, and non-standard edit types (indels/frameshift/stop-gain) warn instead of being silently dropped.',why:'Prime-editing and non-CBE/ABE screens ingest cleanly — future screen types plug in without quietly losing data.',t:'4 tests'},
+      {n:27,title:'Fix LFC3D self-leak (correctness — found by stress-testing)',what:'Residues with no structural neighbours no longer get spurious 3D-hotspot calls; adds an n_neighbors column + opt-in min_neighbors gate.',why:'Kills artifact hotspots (34/37 out-of-structure false positives on BRCA2) so a lab validates real 3D signal, not noise.',t:'4 tests'},
     ];
     document.getElementById('prCards').innerHTML=prs.map(p=>`<div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
