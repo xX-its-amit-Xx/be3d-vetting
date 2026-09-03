@@ -546,15 +546,16 @@
 <!-- VALIDATION SCORECARD + OUTREACH -->
 <section id="validate"><div class="wrap">
   <div class="eyebrow">Honest validation · does it discriminate, or call everything?</div>
-  <h2>Benchmarked on 15 genes — with the failures shown</h2>
-  <p style="max-width:900px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So across <b>15 real base-editing screens</b> (17 target·drug arms) we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and whether BE3D <b>beats a trivial baseline</b> (buried residues, or AlphaMissense). The verdict distribution is deliberately, honestly mixed — about a third genuine, a third qualified, a third negative.</p>
+  <h2>Benchmarked on 18 genes — with the failures shown</h2>
+  <p style="max-width:900px">Recovering a known hotspot proves nothing if a tool flags a third of the protein. So across <b>18 real base-editing screens</b> (20 target·drug arms) we test <b>discrimination</b>, not recall: the <b>base rate</b> (how much it flags at all), <b>enrichment vs chance</b> (hypergeometric/Fisher), the <b>functional-vs-tolerant gap</b>, and whether BE3D <b>beats a trivial baseline</b> (buried residues, or AlphaMissense). The verdict distribution is deliberately, honestly mixed — about a third genuine, a third qualified, a third negative.</p>
   <div class="tiles" style="margin-top:0">
-    <div class="tile"><div class="k">Genes benchmarked</div><div class="n">15</div><div class="l">17 target·drug arms</div></div>
+    <div class="tile"><div class="k">Genes benchmarked</div><div class="n">18</div><div class="l">20 target·drug arms</div></div>
     <div class="tile"><div class="k">Genuine signal</div><div class="n" style="color:var(--good)">~6</div><div class="l">beats chance &amp; a baseline</div></div>
     <div class="tile"><div class="k">Qualified</div><div class="n" style="color:var(--warn)">~6</div><div class="l">real but loses to AlphaMissense / noisy</div></div>
     <div class="tile"><div class="k">Honest negatives</div><div class="n" style="color:var(--serious)">~5</div><div class="l">no signal / over-call — flagged "don't use"</div></div>
   </div>
   <div class="callout warnc">Two limits dominate — and neither is the algorithm. <b>(1) Base-editing reachability:</b> many gold-standard residues cannot be made by CBE/ABE at all (EGFR T790M/C797S/L858R, BRAF V600, PIK3CA H1047R, AKT1 E17K, DNMT3A R882) — so BE3D's "misses" are the <i>assay's</i>, not the tool's. <b>(2) Selection pressure:</b> BE3D is only as good as the screen — give it one with no matching drug arm (BCL2, AKT1) and it returns noise, loudly (base rate up to ~50%). Base rates span ~7–50%, so <b>you must rank</b> (its missing FDR).</div>
+  <div class="callout warnc">Stress-testing huge/structure-poor proteins (ATM 3,056 aa, BRCA2 3,418 aa) surfaced a third failure mode and a real bug. <b>Huge/disordered targets:</b> BE3D over-calls everywhere and doesn't beat "is it folded" (BRCA1, BRCA2), and both are <b>missing from AlphaFold DB</b> (&gt;2,700 aa) so they can't even run out-of-the-box. <b>The self-leak bug:</b> a residue with <i>no structural neighbours</i> still gets a 3D-hotspot call (its LFC3D silently collapses to the 1D value) — 34/37 out-of-structure BRCA2 residues were falsely flagged. Both were filed as a correctness PR + <a href="https://github.com/broadinstitute/BE3D/issues/24">issue #24</a>. (Honest correction: ATM is <i>folded</i>, not disordered, and runtime was fine — the failure was poorly-packed surface residues, not scale.)</div>
 
   <div class="tablewrap"><table id="valTable"><thead><tr>
     <th>Target · user</th><th>Base rate</th><th>Enrichment vs chance</th><th>Discrimination gap</th><th>Beats trivial baseline?</th><th>Honest verdict</th>
@@ -617,6 +618,9 @@
       {t:'PARP2',u:'DDR',base:'high',enr:'~1× (p=0.3)',gap:'0',bl:'✗ loses to AM',verdict:'Fails — underpowered (ABE-only, ~200 residues scored)',v:'warn',doc:'research/P2_analysis_PARP2.md'},
       {t:'AKT1',u:'PI3K/AKT',base:'24–29%',enr:'&lt;1× (p≈0.97)',gap:'inverted',bl:'✗',verdict:'Honest negative — no AKT-inhibitor arm; E17K unreachable. Do not use.',v:'warn',doc:'research/P2_analysis_AKT1.md'},
       {t:'BCL2',u:'apoptosis',base:'~50%',enr:'anti (OR 0.31)',gap:'—',bl:'✗ loses to all',verdict:'Clean negative — no venetoclax arm + not essential → no signal to find',v:'warn',doc:'research/P2_analysis_BCL2.md'},
+      {t:'CHEK2',u:'kinase / VUS',base:'38.8%',enr:'OR 4.3 · p=7e-10',gap:'+0.24',bl:'✗ AlphaMissense &amp; burial',verdict:'Passes VUS test (prec@10=100%); recovers catalytic loop when D347 un-editable — but AM out-ranks it',v:'mixed',doc:'research/P7_run_CHEK2.md'},
+      {t:'ATM',u:'huge PIKK (3056 aa)',base:'~39%',enr:'domain-level (OR 1.6)',gap:'+0.04',bl:'✗ burial &amp; AM',verdict:'Coarse domain flag only; 57% of hotspots = poorly-packed surface FPs; not in AlphaFold DB',v:'warn',doc:'research/P7_run_ATM.md'},
+      {t:'BRCA2',u:'huge / disordered (3418 aa)',base:'38.6%',enr:'n.s. (OR 1.4 · p=0.66)',gap:'~0',bl:'✗ ties "is it folded"',verdict:'Over-calls everywhere; self-leak bug → 34/37 out-of-structure FPs; not in AlphaFold DB',v:'warn',doc:'research/P7_run_BRCA2.md'},
     ];
     document.getElementById('valBody').innerHTML=val.map(r=>`<tr>
       <td class="tool">${r.t}<span class="cat">${r.u}</span></td>
